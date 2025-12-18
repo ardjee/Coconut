@@ -1,15 +1,49 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  
+  const rooms = [
+    {
+      title: "Deluxe Two Bedroom",
+      subtitle: "Grand Penthouse Suite with Sea Front View",
+      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1600",
+    },
+    {
+      title: "Deluxe Two Bedroom",
+      subtitle: "Grand Penthouse Suite with Sea Front View",
+      image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1600",
+    },
+    {
+      title: "Deluxe Two Bedroom",
+      subtitle: "Grand Penthouse Suite with Sea Front View",
+      image: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=1600",
+    },
+  ];
+
+  const nextSlide = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentSlide((prev) => (prev + 1) % rooms.length);
+    setTimeout(() => setIsAnimating(false), 600);
+  };
+
+  const prevSlide = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentSlide((prev) => (prev - 1 + rooms.length) % rooms.length);
+    setTimeout(() => setIsAnimating(false), 600);
+  };
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -117,19 +151,125 @@ export default function Home() {
       </section>
 
       {/* Rooms CTA Section */}
-      <section className="py-20 bg-sand-100 text-center">
-        <div className="container-ikos max-w-3xl ikos-fade-up">
-          <h2 className="text-2xl lg:text-xl font-light text-charcoal-200 mb-8 uppercase">
+      <section className="py-20 bg-sand-100">
+        <div className="container-ikos text-center">
+          <h2 className="text-base lg:text-base font-light text-charcoal-100 mb-2">
             Discover your perfect room
-            <br />
-            at Coconut Beach
           </h2>
+          <h3 className="text-base lg:text-base font-light text-charcoal-100 mb-8">
+            at Coconut Beach
+          </h3>
           <Button
             asChild
-            className="bg-transparent border border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider px-8"
+            className="bg-transparent border border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-xs tracking-wider px-6 py-2 rounded-[3px] mb-12"
           >
             <Link href="/accommodation">DISCOVER ALL ROOMS, SUITES & VILLAS</Link>
           </Button>
+
+          {/* Room Images Carousel */}
+          <div className="relative mt-12 max-w-6xl mx-auto">
+            {/* Navigation Arrows */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-charcoal-200 p-2 rounded-full transition-all duration-300 shadow-md"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-charcoal-200 p-2 rounded-full transition-all duration-300 shadow-md"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
+            {/* Carousel Container */}
+            <div className="flex items-center justify-center gap-4 px-12">
+              {/* Previous Image (Left) */}
+              <div 
+                key={`prev-${currentSlide}`}
+                className="w-1/4 opacity-40 scale-90 transition-all duration-600 cursor-pointer hover:opacity-60 animate-fade-in"
+                onClick={prevSlide}
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={rooms[(currentSlide - 1 + rooms.length) % rooms.length].image}
+                    alt={rooms[(currentSlide - 1 + rooms.length) % rooms.length].title}
+                    className="w-full h-full object-cover transition-transform duration-600"
+                  />
+                </div>
+              </div>
+
+              {/* Current Image (Center) */}
+              <div 
+                key={`center-${currentSlide}`}
+                className="w-1/2 transition-all duration-600 animate-fade-in"
+              >
+                <div className="relative group overflow-hidden">
+                  <div className="relative h-96">
+                    <img
+                      src={rooms[currentSlide].image}
+                      alt={rooms[currentSlide].title}
+                      className="w-full h-full object-cover transition-transform duration-600 scale-105 animate-fade-in"
+                      style={{ animation: 'fadeIn 0.6s ease-out' }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                      <p className="text-xs uppercase tracking-wider mb-2">FROM OUR SUITES</p>
+                      <h4 className="text-sm font-light mb-4">
+                        {rooms[currentSlide].title}
+                        <br />
+                        {rooms[currentSlide].subtitle}
+                      </h4>
+                      <Button
+                        asChild
+                        size="sm"
+                        className="bg-transparent border border-white text-white hover:bg-white hover:text-charcoal-200 transition-all duration-300 uppercase text-xs tracking-wider rounded-[3px]"
+                      >
+                        <Link href="/accommodation">EXPLORE MORE</Link>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Next Image (Right) */}
+              <div 
+                key={`next-${currentSlide}`}
+                className="w-1/4 opacity-40 scale-90 transition-all duration-600 cursor-pointer hover:opacity-60 animate-fade-in"
+                onClick={nextSlide}
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={rooms[(currentSlide + 1) % rooms.length].image}
+                    alt={rooms[(currentSlide + 1) % rooms.length].title}
+                    className="w-full h-full object-cover transition-transform duration-600"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Dots Indicator */}
+            <div className="flex justify-center gap-2 mt-6">
+              {rooms.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    if (!isAnimating) {
+                      setIsAnimating(true);
+                      setCurrentSlide(i);
+                      setTimeout(() => setIsAnimating(false), 600);
+                    }
+                  }}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    i === currentSlide ? "bg-charcoal-200 w-8" : "bg-charcoal-200/30"
+                  }`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
