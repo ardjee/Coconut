@@ -32,7 +32,7 @@ const config: Config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        // Ikos Brand Colors
+        // Coconut Beach Brand Colors
         sand: {
           50: "#F8F7F5",
           100: "#F3F2EF",

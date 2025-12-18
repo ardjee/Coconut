@@ -99,7 +99,7 @@ export default function Home() {
               <p className="text-base text-charcoal-100 mb-6">
                 Stroll palm-dotted gardens that dip down to the water and discover the warmth of
                 the Mediterranean lapping against the Spanish sands. Tucked between mountains and
-                sea, Ikos Andalusia invites you into a world of style, where everything is
+                sea, Coconut Beach invites you into a world of style, where everything is
                 included, and the choice is always yours.
               </p>
             </div>
@@ -122,7 +122,7 @@ export default function Home() {
           <h2 className="text-2xl lg:text-xl font-light text-charcoal-200 mb-8 uppercase">
             Discover your perfect room
             <br />
-            at Ikos Andalusia
+            at Coconut Beach
           </h2>
           <Button
             asChild
@@ -140,8 +140,8 @@ export default function Home() {
             Restaurants and Bars
           </h2>
           <p className="text-base text-charcoal-100 ikos-fade-up">
-            Savour the fabulous flavours of menus created by Michelin-starred chefs at Ikos
-            Andalusia's nine restaurants, offering unique Mediterranean delicacies, Asian flavours,
+            Savour the fabulous flavours of menus created by Michelin-starred chefs at Coconut
+            Beach's nine restaurants, offering unique Mediterranean delicacies, Asian flavours,
             French and Italian cuisine and Spanish and Greek gastronomic delights.
           </p>
           <Button
@@ -203,7 +203,7 @@ export default function Home() {
             <span className="block">experiences</span>
           </h2>
           <p className="text-base text-charcoal-100 ikos-fade-up">
-            Settled on the shores of the Spanish Mediterranean, Ikos Andalusia offers a world of
+            Settled on the shores of the Spanish Mediterranean, Coconut Beach offers a world of
             experiences for guests of all ages.
           </p>
         </div>
@@ -244,7 +244,7 @@ export default function Home() {
         <div className="container-ikos max-w-4xl text-center">
           <blockquote className="ikos-fade-up">
             <p className="text-2xl lg:text-3xl font-thin text-charcoal-200 mb-8 italic">
-              "We are enjoying the last day of our third stay at Ikos Andalusia, and once again we
+              "We are enjoying the last day of our third stay at Coconut Beach, and once again we
               have had the most amazing holiday... You all truly elevated our stay!"
             </p>
             <footer className="text-sm text-charcoal-100">
@@ -292,7 +292,7 @@ export default function Home() {
             Resort Location
           </h2>
           <p className="text-base text-charcoal-100 mb-8 ikos-fade-up">
-            Ikos Andalusia is located in Estepona, on Spain's Costa del Sol. Close to Marbella,
+            Coconut Beach is located in Estepona, on Spain's Costa del Sol. Close to Marbella,
             it's less than one hour from Malaga airport.
           </p>
           <Button

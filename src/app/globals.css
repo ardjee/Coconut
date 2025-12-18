@@ -4,8 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Ikos Brand Colors */
-  --color-sand-50: #F8F7F5;
+/* Coconut Beach Brand Colors */
+--color-sand-50: #F8F7F5;
   --color-sand-100: #F3F2EF;
   --color-sand-200: #ECECEA;
   --color-sand-300: #DFDED7;
@@ -113,7 +113,7 @@
     text-wrap: balance;
   }
   
-  /* Ikos Custom Animations */
+  /* Coconut Beach Custom Animations */
   .ikos-fade-in {
     animation: fadeIn 1s ease-out;
   }

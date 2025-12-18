@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "All Inclusive Holidays in Spain (Marbella) | Ikos Andalusia",
-  description: "Experience the ultimate all-inclusive holidays in Marbella, Spain. Visit the Ikos Andalusia's website and book your stay now!",
+  title: "All Inclusive Holidays in Spain (Marbella) | Coconut Beach",
+  description: "Experience the ultimate all-inclusive holidays in Marbella, Spain. Visit the Coconut Beach's website and book your stay now!",
 };
 
 export default function RootLayout({

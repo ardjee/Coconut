@@ -22,7 +22,7 @@ const navigation = [
     href: "/resorts",
     submenu: [
       { name: "All Resorts", href: "/resorts" },
-      { name: "Ikos Andalusia", href: "/", location: "Marbella-Estepona, Spain" },
+      { name: "Coconut Beach", href: "/", location: "Marbella-Estepona, Spain" },
     ],
   },
   { name: "Activities", href: "/deluxe-collection" },

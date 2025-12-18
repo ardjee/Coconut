@@ -36,7 +36,7 @@ export function Footer() {
             <div>
               <p className="text-base text-charcoal-100">
                 Whether you are already a guest at our resorts or simply planning your stay ahead,
-                this app will help you explore all Ikos Resorts and destinations.
+                this app will help you explore all Coconut Beach Resorts and destinations.
               </p>
             </div>
             <div className="flex gap-4 justify-end">
@@ -128,7 +128,7 @@ export function Footer() {
 
           {/* Copyright */}
           <div className="text-center">
-            <p className="text-xs text-white/70">© 2025 Ikos Resorts</p>
+            <p className="text-xs text-white/70">© 2025 Coconut Beach Resorts</p>
           </div>
         </div>
       </div>
