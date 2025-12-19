@@ -15,19 +15,44 @@ export default function Home() {
   
   const rooms = [
     {
-      title: "Deluxe Two Bedroom",
-      subtitle: "Grand Penthouse Suite with Sea Front View",
-      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1600",
+      title: "Luxury Pool Suite",
+      subtitle: "Private Pool with Lake View",
+      image: "/Coconut_1.18.1.jpg",
     },
     {
-      title: "Deluxe Two Bedroom",
-      subtitle: "Grand Penthouse Suite with Sea Front View",
-      image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1600",
+      title: "Resort Accommodation",
+      subtitle: "Modern Building with Stunning Architecture",
+      image: "/Coconut_1.17.1.jpg",
     },
     {
-      title: "Deluxe Two Bedroom",
-      subtitle: "Grand Penthouse Suite with Sea Front View",
-      image: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=1600",
+      title: "Garden Retreat",
+      subtitle: "Tranquil Seating Area with Thatched Umbrella",
+      image: "/Coconut_1.20.1.jpg",
+    },
+    {
+      title: "Pool Complex",
+      subtitle: "Multi-Level Swimming Pool with Bridge",
+      image: "/Coconut_1.25.1.jpg",
+    },
+    {
+      title: "Poolside Paradise",
+      subtitle: "Elegant Pool Area with Arch Bridge",
+      image: "/Coconut_1.26.1.jpg",
+    },
+    {
+      title: "Outdoor Dining",
+      subtitle: "Secluded Seating Under Thatched Umbrella",
+      image: "/Coconut_1.16.1.png",
+    },
+    {
+      title: "Resort Grounds",
+      subtitle: "Expansive Lawn with Thatched Huts",
+      image: "/20210309_110934.jpg",
+    },
+    {
+      title: "Spa Experience",
+      subtitle: "Luxurious Spa Treatment Room",
+      image: "/massage.png",
     },
   ];
 
@@ -99,10 +124,10 @@ export default function Home() {
       <section className="py-20 lg:py-32 bg-white">
         <div className="container-ikos max-w-4xl text-center">
           <h2 className="text-3xl lg:text-4xl font-thin text-charcoal-200 mb-4 ikos-fade-up uppercase">
-            A world of
+            a world where fun
           </h2>
           <h2 className="text-3xl lg:text-4xl font-thin text-charcoal-200 mb-8 ikos-fade-up uppercase">
-            cosmopolitan charm
+            relaxation and enjoyment come together
           </h2>
           <p className="text-base text-charcoal-100 max-w-2xl mx-auto ikos-fade-up">
             Immense national parks, endless stretches of sun-kissed sands, and a scattering of
@@ -113,11 +138,11 @@ export default function Home() {
 
       {/* Image Section */}
       <section className="w-full">
-        <div className="relative h-[60vh] lg:h-[70vh]">
+        <div className="relative h-[60vh] lg:h-[70vh] flex items-center justify-center">
           <img
-            src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=2080"
-            alt="Beach restaurant"
-            className="w-full h-full object-cover"
+            src="/palm_model1.png"
+            alt="Tropical lakeside setting"
+            className="w-full h-full object-contain"
           />
         </div>
       </section>
@@ -154,17 +179,11 @@ export default function Home() {
       <section className="py-20 bg-sand-100">
         <div className="container-ikos text-center">
           <h2 className="text-base lg:text-base font-light text-charcoal-100 mb-2">
-            Discover your perfect room
+            Discover Paradise
           </h2>
           <h3 className="text-base lg:text-base font-light text-charcoal-100 mb-8">
-            at Coconut Beach
+            We can't wait to greet you here!
           </h3>
-          <Button
-            asChild
-            className="bg-transparent border border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-xs tracking-wider px-6 py-2 rounded-[3px] mb-12"
-          >
-            <Link href="/accommodation">DISCOVER ALL ROOMS, SUITES & VILLAS</Link>
-          </Button>
 
           {/* Room Images Carousel */}
           <div className="relative mt-12 max-w-6xl mx-auto">
@@ -277,7 +296,7 @@ export default function Home() {
       <section className="py-20 lg:py-32 bg-white">
         <div className="container-ikos max-w-4xl text-center mb-16">
           <h2 className="text-2xl lg:text-xl font-light text-charcoal-200 mb-6 ikos-fade-up uppercase">
-            Restaurants and Bars
+            Restaurant and Bar
           </h2>
           <p className="text-base text-charcoal-100 ikos-fade-up">
             Savour the fabulous flavours of menus created by Michelin-starred chefs at Coconut
@@ -286,7 +305,7 @@ export default function Home() {
           </p>
           <Button
             asChild
-            className="mt-8 bg-transparent border border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider px-8"
+            className="mt-8 bg-transparent border border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider px-8 rounded-[3px]"
           >
             <Link href="/restaurants">Explore all restaurants and bars</Link>
           </Button>
@@ -298,10 +317,18 @@ export default function Home() {
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="relative h-64 lg:h-80 overflow-hidden ikos-fade-up group">
                 <img
-                  src={`https://images.unsplash.com/photo-${
-                    1414235077116 + i * 1000000
-                  }-281a6c4d7e3e?q=80&w=800`}
-                  alt={`Restaurant ${i}`}
+                  src={
+                    i === 1 ? "/cheers.png" :
+                    i === 2 ? "/bar2.jpg" :
+                    `https://images.unsplash.com/photo-${
+                      1414235077116 + i * 1000000
+                    }-281a6c4d7e3e?q=80&w=800`
+                  }
+                  alt={
+                    i === 1 ? "Cheers" :
+                    i === 2 ? "Bar" :
+                    `Restaurant ${i}`
+                  }
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
@@ -326,8 +353,8 @@ export default function Home() {
         <div className="container-ikos">
           <div className="relative h-[60vh] lg:h-[70vh] ikos-fade-up">
             <img
-              src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=2080"
-              alt="Pool area"
+              src="/IMG_20220107_095557.jpg"
+              alt="Pool view from room"
               className="w-full h-full object-cover"
             />
           </div>
@@ -343,7 +370,7 @@ export default function Home() {
             <span className="block">experiences</span>
           </h2>
           <p className="text-base text-charcoal-100 ikos-fade-up">
-            Settled on the shores of the Spanish Mediterranean, Coconut Beach offers a world of
+            Settled on the shores of tropical Lake Victoria, Coconut Beach offers a world of
             experiences for guests of all ages.
           </p>
         </div>

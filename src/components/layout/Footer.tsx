@@ -27,40 +27,11 @@ export function Footer() {
       {/* Newsletter Section */}
       <div className="bg-sand-300 py-16">
         <div className="container-ikos">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-            <div>
-              <h3 className="text-2xl font-light text-charcoal-200 mb-2">
-                Download our app
-              </h3>
-            </div>
-            <div>
-              <p className="text-base text-charcoal-100">
-                Whether you are already a guest at our resorts or simply planning your stay ahead,
-                this app will help you explore all Coconut Beach Resorts and destinations.
-              </p>
-            </div>
-            <div className="flex gap-4 justify-end">
-              <Link
-                href="#"
-                className="inline-block hover:opacity-80 transition-opacity"
-              >
-                <img
-                  src="/app-store.png"
-                  alt="Download on App Store"
-                  className="h-10"
-                />
-              </Link>
-              <Link
-                href="#"
-                className="inline-block hover:opacity-80 transition-opacity"
-              >
-                <img
-                  src="/google-play.png"
-                  alt="Get it on Google Play"
-                  className="h-10"
-                />
-              </Link>
-            </div>
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="text-base text-charcoal-100">
+              Whether you are already a guest at our resorts or simply planning your stay ahead,
+              this app will help you explore all Coconut Beach Resorts and destinations.
+            </p>
           </div>
         </div>
       </div>

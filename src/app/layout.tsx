@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "All Inclusive Holidays in Spain (Marbella) | Coconut Beach",
-  description: "Experience the ultimate all-inclusive holidays in Marbella, Spain. Visit the Coconut Beach's website and book your stay now!",
+  title: "Coconut Beach, paradise on Lake Victoria",
+  description: "Experience paradise on Lake Victoria at Coconut Beach. Visit our website and book your stay now!",
 };
 
 export default function RootLayout({

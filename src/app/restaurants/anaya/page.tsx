@@ -199,7 +199,7 @@ export default function AnayaPage() {
               { name: "Fresco", cuisine: "Italian", link: "/restaurants/fresco", image: "https://ikosresorts.com/wp-content/uploads/2022/11/Ikos-Andalusia-_-Fresco-Indoor_2700x1722-1-555x555.jpg", description: "Guided by the genius of Michelin-starred chef Ettore Botrini, discover the exquisite culinary sensations of Italy. Fresco offers the finest à la carte dining, authentic Italian flavours and fresh local produce paired with perfect wines." },
               { name: "Ouzo", cuisine: "Greek", link: "/restaurants/ouzo", image: "https://ikosresorts.com/wp-content/uploads/2022/11/Ikos-Andalusia-Ouzo-Restaurant-Outdoor-1-555x555.jpg", description: "Enjoy rich Greek cuisine with a delightfully modern twist in a romantic open-air setting. A combination of Greek tradition with innovative techniques and delicious flavours." },
             ].map((restaurant) => (
-              <div key={restaurant.name} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div key={restaurant.name} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
                 <div className="aspect-square overflow-hidden">
                   <img
                     src={restaurant.image}
@@ -207,25 +207,27 @@ export default function AnayaPage() {
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-grow">
                   <div className="text-sm text-sand-500 mb-2 uppercase tracking-wider">
                     {restaurant.cuisine}
                   </div>
                   <h3 className="text-xl font-thin text-charcoal-200 mb-4 uppercase">
                     {restaurant.name}
                   </h3>
-                  <p className="text-sm text-charcoal-100 mb-4">
+                  <p className="text-sm text-charcoal-100 mb-4 flex-grow">
                     {restaurant.description}
                   </p>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="w-full border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider"
-                  >
-                    <Link href={restaurant.link}>
-                      Explore
-                    </Link>
-                  </Button>
+                  <div className="mt-auto">
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="w-full border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider rounded-[3px]"
+                    >
+                      <Link href={restaurant.link}>
+                        Explore
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               </div>
             ))}

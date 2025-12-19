@@ -8,25 +8,39 @@ import { Menu } from "lucide-react";
 
 const navigation = [
   {
-    name: "The concept",
-    href: "/concept",
-    submenu: [
-      { name: "Unconditional Luxury", href: "/unconditional-luxury" },
-      { name: "No.1 IN THE WORLD", href: "/best-resort" },
-      { name: "Experiences", href: "/experiences" },
-      { name: "Sustainability", href: "/sustainability" },
-    ],
-  },
-  {
     name: "Accommodation",
     href: "/resorts",
     submenu: [
-      { name: "All Resorts", href: "/resorts" },
-      { name: "Coconut Beach", href: "/", location: "Marbella-Estepona, Spain" },
+      { name: "Upper Rooms", href: "/accommodation/upper-rooms" },
+      { name: "Lower Rooms", href: "/accommodation/lower-rooms" },
+      { name: "Camping", href: "/accommodation/camping" },
+      { name: "Groups", href: "/accommodation/groups" },
     ],
   },
-  { name: "Activities", href: "/deluxe-collection" },
-  { name: "Services", href: "/whats-included" },
+  {
+    name: "Activities",
+    href: "/deluxe-collection",
+    submenu: [
+      { name: "Boat Cruise", href: "/activities/boat-cruise" },
+      { name: "Pool Table", href: "/activities/pool-table" },
+      { name: "Beach Volleyball", href: "/activities/beach-volleyball" },
+      { name: "Large Screen DSTV", href: "/activities/large-screen-dstv" },
+      { name: "Massage & Wellness", href: "/activities/massage-wellness" },
+      { name: "Swimming", href: "/activities/swimming" },
+      { name: "Boda Boda Drives", href: "/activities/boda-boda-drives" },
+      { name: "Local School Visit", href: "/activities/local-school-visit" },
+    ],
+  },
+  {
+    name: "Services",
+    href: "/whats-included",
+    submenu: [
+      { name: "Restaurant", href: "/restaurants" },
+      { name: "Bar", href: "/services/bar" },
+      { name: "Laundry", href: "/services/laundry" },
+      { name: "Pool", href: "/services/pool" },
+    ],
+  },
   {
     name: "Offers",
     href: "/offers",
@@ -37,6 +51,19 @@ const navigation = [
     ],
   },
   { name: "Gallery", href: "/gallery" },
+  {
+    name: "Events",
+    href: "/events",
+    submenu: [
+      { name: "Weddings", href: "/events/weddings" },
+      { name: "Workshops", href: "/events/workshops" },
+      { name: "Birthday Parties", href: "/events/birthday-parties" },
+      { name: "Ceremonies", href: "/events/ceremonies" },
+      { name: "Artist Performances", href: "/events/artist-performances" },
+      { name: "Company Retreats", href: "/events/company-retreats" },
+    ],
+  },
+  { name: "about us", href: "/concept" },
 ];
 
 export function Header() {
@@ -93,11 +120,6 @@ export function Header() {
                             className="block py-3 text-sm text-charcoal-200 hover:text-charcoal-100 border-b border-sand-200 last:border-0 transition-colors"
                           >
                             {subitem.name}
-                            {"location" in subitem && (
-                              <span className="block text-xs font-light mt-1 normal-case">
-                                {subitem.location}
-                              </span>
-                            )}
                           </Link>
                         ))}
                       </div>
