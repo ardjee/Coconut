@@ -124,14 +124,13 @@ export default function Home() {
       <section className="py-20 lg:py-32 bg-white">
         <div className="container-ikos max-w-4xl text-center">
           <h2 className="text-3xl lg:text-4xl font-thin text-charcoal-200 mb-4 ikos-fade-up uppercase">
-            a world where fun
+            a world where nature
           </h2>
           <h2 className="text-3xl lg:text-4xl font-thin text-charcoal-200 mb-8 ikos-fade-up uppercase">
             relaxation and enjoyment come together
           </h2>
           <p className="text-base text-charcoal-100 max-w-2xl mx-auto ikos-fade-up">
-            Immense national parks, endless stretches of sun-kissed sands, and a scattering of
-            quaint whitewashed villages await on the glamorous Costa del Sol.
+            The amazing waters of lake Victoria and the beautiful nature combined with the luxury of coconut beach are in the palm of your hand!
           </p>
         </div>
       </section>
@@ -155,19 +154,16 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="ikos-fade-up">
               <h2 className="text-2xl lg:text-xl font-light text-charcoal-200 mb-6 uppercase">
-                Sophistication and Spanish style
+                Ugandan style with western luxury
               </h2>
               <p className="text-base text-charcoal-100 mb-6">
-                Stroll palm-dotted gardens that dip down to the water and discover the warmth of
-                the Mediterranean lapping against the Spanish sands. Tucked between mountains and
-                sea, Coconut Beach invites you into a world of style, where everything is
-                included, and the choice is always yours.
+                Coconut beach is the perfect place to enjoy western luxury without losing the feeling of the amazing Ugandan culture and style of living
               </p>
             </div>
             <div className="ikos-fade-up">
               <div className="relative h-[500px] lg:h-[600px] rounded-2xl overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1887"
+                  src="/Coconut_1.20.1.jpg"
                   alt="Resort view"
                   className="w-full h-full object-cover rounded-2xl"
                 />
@@ -301,9 +297,7 @@ export default function Home() {
             Restaurant and Bar
           </h2>
           <p className="text-base text-charcoal-100 ikos-fade-up">
-            Savour the fabulous flavours of menus created by Michelin-starred chefs at Coconut
-            Beach's nine restaurants, offering unique Mediterranean delicacies, Asian flavours,
-            French and Italian cuisine and Spanish and Greek gastronomic delights.
+            Coconut beach offers a varied menu to choose from. Not hungry? No problem, just have a drink at our extensive bar
           </p>
           <Button
             asChild
@@ -344,7 +338,7 @@ export default function Home() {
             Pools and Beaches
           </h2>
           <p className="text-base text-charcoal-100 ikos-fade-up">
-            Discover blissful afternoons enjoying the cyan water of our pool, which has different depths troughout the circles, so all ages can have fun. You can also take a refreshing dive in the beautiful lake Victoria if you've had enough of our pool! (this is not recommended)
+            Discover blissful afternoons enjoying the cyan water of our pool, which has different depths troughout the circles, so all ages can have fun safely. You can also take a refreshing dive in the beautiful lake Victoria if you've had enough of our pool! (this is not recommended)
           </p>
         </div>
 
