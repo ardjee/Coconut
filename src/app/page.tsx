@@ -138,12 +138,14 @@ export default function Home() {
 
       {/* Image Section */}
       <section className="w-full">
-        <div className="relative h-[60vh] lg:h-[70vh] flex items-center justify-center">
-          <img
-            src="/palm_model1.png"
-            alt="Tropical lakeside setting"
-            className="w-full h-full object-contain"
-          />
+        <div className="relative h-[60vh] lg:h-[70vh] flex items-center justify-center px-4">
+          <div className="w-full h-full rounded-2xl overflow-hidden flex items-center justify-center bg-transparent">
+            <img
+              src="/palm_model1.png"
+              alt="Tropical lakeside setting"
+              className="max-w-full max-h-full w-auto h-auto object-contain rounded-2xl"
+            />
+          </div>
         </div>
       </section>
 
@@ -163,11 +165,11 @@ export default function Home() {
               </p>
             </div>
             <div className="ikos-fade-up">
-              <div className="relative h-[500px] lg:h-[600px]">
+              <div className="relative h-[500px] lg:h-[600px] rounded-2xl overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1887"
                   alt="Resort view"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-2xl"
                 />
               </div>
             </div>
@@ -208,14 +210,14 @@ export default function Home() {
               {/* Previous Image (Left) */}
               <div 
                 key={`prev-${currentSlide}`}
-                className="w-1/4 opacity-40 scale-90 transition-all duration-600 cursor-pointer hover:opacity-60 animate-fade-in"
+                className="w-1/4 opacity-40 scale-90 transition-all duration-600 cursor-pointer hover:opacity-60 animate-fade-in rounded-2xl overflow-hidden"
                 onClick={prevSlide}
               >
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-64 overflow-hidden rounded-2xl">
                   <img
                     src={rooms[(currentSlide - 1 + rooms.length) % rooms.length].image}
                     alt={rooms[(currentSlide - 1 + rooms.length) % rooms.length].title}
-                    className="w-full h-full object-cover transition-transform duration-600"
+                    className="w-full h-full object-cover transition-transform duration-600 rounded-2xl"
                   />
                 </div>
               </div>
@@ -225,15 +227,15 @@ export default function Home() {
                 key={`center-${currentSlide}`}
                 className="w-1/2 transition-all duration-600 animate-fade-in"
               >
-                <div className="relative group overflow-hidden">
-                  <div className="relative h-96">
+                <div className="relative group overflow-hidden rounded-2xl">
+                  <div className="relative h-96 rounded-2xl overflow-hidden">
                     <img
                       src={rooms[currentSlide].image}
                       alt={rooms[currentSlide].title}
-                      className="w-full h-full object-cover transition-transform duration-600 scale-105 animate-fade-in"
+                      className="w-full h-full object-cover transition-transform duration-600 scale-105 animate-fade-in rounded-2xl"
                       style={{ animation: 'fadeIn 0.6s ease-out' }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-2xl" />
                     <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                       <p className="text-xs uppercase tracking-wider mb-2">FROM OUR SUITES</p>
                       <h4 className="text-sm font-light mb-4">
@@ -256,14 +258,14 @@ export default function Home() {
               {/* Next Image (Right) */}
               <div 
                 key={`next-${currentSlide}`}
-                className="w-1/4 opacity-40 scale-90 transition-all duration-600 cursor-pointer hover:opacity-60 animate-fade-in"
+                className="w-1/4 opacity-40 scale-90 transition-all duration-600 cursor-pointer hover:opacity-60 animate-fade-in rounded-2xl overflow-hidden"
                 onClick={nextSlide}
               >
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-64 overflow-hidden rounded-2xl">
                   <img
                     src={rooms[(currentSlide + 1) % rooms.length].image}
                     alt={rooms[(currentSlide + 1) % rooms.length].title}
-                    className="w-full h-full object-cover transition-transform duration-600"
+                    className="w-full h-full object-cover transition-transform duration-600 rounded-2xl"
                   />
                 </div>
               </div>
@@ -313,23 +315,21 @@ export default function Home() {
 
         {/* Restaurant Images Grid */}
         <div className="container-ikos">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="relative h-64 lg:h-80 overflow-hidden ikos-fade-up group">
+          <div className="grid grid-cols-2 lg:grid-cols-2 gap-4">
+            {[1, 2].map((i) => (
+              <div key={i} className="relative h-64 lg:h-80 overflow-hidden ikos-fade-up group rounded-2xl">
                 <img
                   src={
                     i === 1 ? "/cheers.png" :
                     i === 2 ? "/bar2.jpg" :
-                    `https://images.unsplash.com/photo-${
-                      1414235077116 + i * 1000000
-                    }-281a6c4d7e3e?q=80&w=800`
+                    ""
                   }
                   alt={
                     i === 1 ? "Cheers" :
                     i === 2 ? "Bar" :
-                    `Restaurant ${i}`
+                    ""
                   }
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 rounded-2xl"
                 />
               </div>
             ))}
@@ -344,18 +344,16 @@ export default function Home() {
             Pools and Beaches
           </h2>
           <p className="text-base text-charcoal-100 ikos-fade-up">
-            Discover blissful afternoons enjoying the cyan water and sands on our exclusively
-            serviced beach, soaking up the warm Spanish sun in 21 acres of verdant landscaped
-            gardens, or cooling off in one of the nine indoor & outdoor swimming pools.
+            Discover blissful afternoons enjoying the cyan water of our pool, which has different depths troughout the circles, so all ages can have fun. You can also take a refreshing dive in the beautiful lake Victoria if you've had enough of our pool! (this is not recommended)
           </p>
         </div>
 
         <div className="container-ikos">
-          <div className="relative h-[60vh] lg:h-[70vh] ikos-fade-up">
+          <div className="relative h-[60vh] lg:h-[70vh] ikos-fade-up rounded-2xl overflow-hidden">
             <img
-              src="/IMG_20220107_095557.jpg"
+              src="/poolside_fun.png"
               alt="Pool view from room"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-2xl"
             />
           </div>
         </div>
@@ -378,22 +376,22 @@ export default function Home() {
         <div className="container-ikos">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { title: "Activities", image: "photo-1476480862126-209bfaa8edc8" },
-              { title: "Kids", image: "photo-1503454537195-1dcabb73ffb9" },
+              { title: "Activities", image: "/volleyball2.png" },
+              { title: "Kids", image: "/Ugandan children.png" },
               { title: "Spa", image: "photo-1540555700478-4be289fbecef" },
               { title: "Entertainment", image: "photo-1470229722913-7c0e2dbbafd3" },
             ].map((item, i) => (
               <Card
                 key={i}
-                className="group overflow-hidden border-0 shadow-none bg-transparent cursor-pointer"
+                className="group overflow-hidden border-0 shadow-none bg-transparent cursor-pointer rounded-2xl"
               >
-                <div className="relative h-80 overflow-hidden">
+                <div className="relative h-80 overflow-hidden rounded-2xl">
                   <img
-                    src={`https://images.unsplash.com/${item.image}?q=80&w=800`}
+                    src={item.image.startsWith('/') ? item.image : `https://images.unsplash.com/${item.image}?q=80&w=800`}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 rounded-2xl"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-2xl" />
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <h3 className="text-xl font-light text-white uppercase tracking-wide">
                       {item.title}
@@ -421,37 +419,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Destination Section */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="container-ikos">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="relative h-[400px] lg:h-[500px] ikos-fade-up">
-              <img
-                src="https://images.unsplash.com/photo-1583422409516-2895a77efded?q=80&w=2070"
-                alt="Marbella"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="ikos-fade-up bg-sand-100 p-12">
-              <h2 className="text-2xl lg:text-xl font-light text-charcoal-200 mb-6 uppercase">
-                Destination Marbella-Estepona
-              </h2>
-              <p className="text-base text-charcoal-100 mb-8">
-                Andalusia enjoys a rich history, with Moorish culture influencing everything from
-                the architecture to the rich cuisine. Indulge in the exclusive charm of Marbella
-                and the historic attractions of Estepona.
-              </p>
-              <Button
-                asChild
-                className="bg-sand-500 text-white hover:bg-sand-400 transition-all duration-300 uppercase text-sm tracking-wider"
-              >
-                <Link href="/destination">Explore Marbella-Estepona</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Resort Location Section */}
       <section className="py-20 lg:py-32 bg-sand-50">
         <div className="container-ikos max-w-4xl text-center">
@@ -459,15 +426,31 @@ export default function Home() {
             Resort Location
           </h2>
           <p className="text-base text-charcoal-100 mb-8 ikos-fade-up">
-            Coconut Beach is located in Estepona, on Spain's Costa del Sol. Close to Marbella,
-            it's less than one hour from Malaga airport.
+            Coconut Beach is located next to Majanji, near the border of Kenya. the resort is located on the beach of lake Victoria
           </p>
           <Button
             asChild
-            className="bg-transparent border border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider px-8"
+            className="bg-transparent border border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider px-8 mb-12"
           >
             <Link href="#map">Getting Here</Link>
           </Button>
+        </div>
+        
+        {/* Google Maps Embed */}
+        <div className="container-ikos max-w-4xl mt-12 mx-auto">
+          <div className="ikos-fade-up">
+            <div className="relative w-full h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-lg bg-white">
+              <iframe
+                src="https://www.google.com/maps?q=0.2502377,33.9870324&hl=en&z=15&output=embed"
+                className="absolute inset-0 w-full h-full"
+                style={{ border: 0, display: 'block' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Coconut Beach Resort Location"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
