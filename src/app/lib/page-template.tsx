@@ -12,12 +12,14 @@ interface PageTemplateProps {
   title: string;
   heroImage?: string;
   heroImagePosition?: "top" | "center" | "bottom";
+  detailsImage?: string;
   description: string;
   details?: {
     subtitle?: string;
     info?: string;
     hours?: string;
   };
+  duplicateDetails?: boolean;
 }
 
 export function PageTemplate({
@@ -25,8 +27,10 @@ export function PageTemplate({
   title,
   heroImage = "/Coconut_1.18.1.jpg",
   heroImagePosition = "center",
+  detailsImage,
   description,
   details,
+  duplicateDetails = false,
 }: PageTemplateProps) {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
@@ -93,44 +97,86 @@ export function PageTemplate({
 
       {/* Details Section */}
       {details && (
-        <section className="py-20 lg:py-32 bg-gradient-to-r from-sand-50 to-white">
-          <div className="container-ikos">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="order-2 lg:order-1">
-                <img
-                  src={heroImage}
-                  alt={title}
-                  className="w-full h-96 object-cover rounded-lg shadow-lg"
-                />
-              </div>
-              <div className="order-1 lg:order-2 text-center lg:text-left">
-                {details.subtitle && (
-                  <h3 className="text-2xl lg:text-3xl font-thin text-charcoal-200 mb-4 uppercase">
-                    {details.subtitle}
-                  </h3>
-                )}
-                {details.info && (
-                  <h4 className="text-lg lg:text-xl font-light text-charcoal-100 mb-6">
-                    {details.info}
-                  </h4>
-                )}
-                {details.hours && (
-                  <div className="mb-6">
-                    <div className="text-sm text-charcoal-100 mb-2">
-                      <strong>Hours:</strong> {details.hours}
+        <>
+          <section className="py-20 lg:py-32 bg-gradient-to-r from-sand-50 to-white">
+            <div className="container-ikos">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div className="order-2 lg:order-1">
+                  <img
+                    src={detailsImage || heroImage}
+                    alt={title}
+                    className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                  />
+                </div>
+                <div className="order-1 lg:order-2 text-center lg:text-left">
+                  {details.subtitle && (
+                    <h3 className="text-2xl lg:text-3xl font-thin text-charcoal-200 mb-4 uppercase">
+                      {details.subtitle}
+                    </h3>
+                  )}
+                  {details.info && (
+                    <h4 className="text-lg lg:text-xl font-light text-charcoal-100 mb-6">
+                      {details.info}
+                    </h4>
+                  )}
+                  {details.hours && (
+                    <div className="mb-6">
+                      <div className="text-sm text-charcoal-100 mb-2">
+                        <strong>Hours:</strong> {details.hours}
+                      </div>
                     </div>
-                  </div>
-                )}
-                <Button
-                  asChild
-                  className="bg-transparent border border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider rounded-[3px]"
-                >
-                  <Link href="/book">Book Now</Link>
-                </Button>
+                  )}
+                  <Button
+                    asChild
+                    className="bg-transparent border border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider rounded-[3px]"
+                  >
+                    <Link href="/book">Book Now</Link>
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+          {duplicateDetails && (
+            <section className="py-20 lg:py-32 bg-gradient-to-r from-sand-50 to-white">
+              <div className="container-ikos">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                  <div className="order-2 lg:order-1">
+                    <img
+                      src={detailsImage || heroImage}
+                      alt={title}
+                      className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                    />
+                  </div>
+                  <div className="order-1 lg:order-2 text-center lg:text-left">
+                    {details.subtitle && (
+                      <h3 className="text-2xl lg:text-3xl font-thin text-charcoal-200 mb-4 uppercase">
+                        {details.subtitle}
+                      </h3>
+                    )}
+                    {details.info && (
+                      <h4 className="text-lg lg:text-xl font-light text-charcoal-100 mb-6">
+                        {details.info}
+                      </h4>
+                    )}
+                    {details.hours && (
+                      <div className="mb-6">
+                        <div className="text-sm text-charcoal-100 mb-2">
+                          <strong>Hours:</strong> {details.hours}
+                        </div>
+                      </div>
+                    )}
+                    <Button
+                      asChild
+                      className="bg-transparent border border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider rounded-[3px]"
+                    >
+                      <Link href="/book">Book Now</Link>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+        </>
       )}
 
       {/* Image Gallery Section */}
@@ -143,7 +189,7 @@ export function PageTemplate({
               "/Coconut_1.20.1.jpg",
               "/Coconut_1.25.1.jpg",
             ].map((src, i) => (
-              <div key={i} className="aspect-square overflow-hidden rounded-lg shadow-lg ikos-fade-up">
+              <div key={i} className="aspect-square overflow-hidden rounded-2xl shadow-lg ikos-fade-up">
                 <img
                   src={src}
                   alt={`${title} ${i + 1}`}

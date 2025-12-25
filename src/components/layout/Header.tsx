@@ -155,7 +155,7 @@ export function Header() {
                   <div key={item.name}>
                     <Link
                       href={item.href}
-                      className="block text-sm uppercase text-charcoal-200 py-2"
+                      className="block text-sm uppercase text-charcoal-200 py-2 pl-4"
                     >
                       {item.name}
                     </Link>

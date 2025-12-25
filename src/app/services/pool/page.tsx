@@ -5,12 +5,14 @@ export default function PoolPage() {
     <PageTemplate
       category="Services"
       title="Pool"
-      heroImage="/Coconut_1.25.1.jpg"
-      description="Enjoy our beautiful pool facilities with multiple pools, comfortable lounging areas, and poolside service. Perfect for relaxation and recreation."
+      heroImage="/coconut overview sharp.png"
+      detailsImage="/swimming pool 1.png"
+      description="Our swimming pool consists of 2 parts: The main pool and the toddler pool. The pool gets cleaned daily and is always of amazing temperature."
       details={{
-        subtitle: "Pool Facilities",
-        info: "Multiple pools | Poolside service | Comfortable lounging",
+        subtitle: "Main pool",
+        info: "our main pool has 3 different layers, all with different depths. This way we make sure the pool is safe and fun for every age!",
       }}
+      duplicateDetails={true}
     />
   );
 }
