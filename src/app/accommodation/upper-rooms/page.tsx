@@ -5,11 +5,12 @@ export default function UpperRoomsPage() {
     <PageTemplate
       category="Accommodation"
       title="Upper Rooms"
-      heroImage="/Coconut_1.17.1.jpg"
-      description="Experience comfort and elegance in our upper rooms, offering stunning views and modern amenities. Each room is thoughtfully designed to provide a peaceful retreat with all the comforts of home."
+      heroImage="/upper rooms (AI).png"
+      heroImagePosition="top"
+      description="Experience comfort and elegance in our upper rooms, offering a stunning view over coconut beach and the majestic Lake Victoria."
       details={{
         subtitle: "Upper Level",
-        info: "Spacious rooms with panoramic views | Modern amenities | Comfortable furnishings",
+        info: "Our upper rooms offer a king-sized bed, an included bathroom and a fan. Every room also includes a beautiful balcony where you can enjoy watching the sunset. There is a daily cleaning service included.",
       }}
     />
   );

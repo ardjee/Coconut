@@ -11,6 +11,7 @@ interface PageTemplateProps {
   category: string;
   title: string;
   heroImage?: string;
+  heroImagePosition?: "top" | "center" | "bottom";
   description: string;
   details?: {
     subtitle?: string;
@@ -23,6 +24,7 @@ export function PageTemplate({
   category,
   title,
   heroImage = "/Coconut_1.18.1.jpg",
+  heroImagePosition = "center",
   description,
   details,
 }: PageTemplateProps) {
@@ -53,13 +55,12 @@ export function PageTemplate({
       {/* Hero Section */}
       <section className="relative h-screen w-full overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover"
           style={{
             backgroundImage: `url('${heroImage}')`,
+            backgroundPosition: heroImagePosition === "top" ? "top" : heroImagePosition === "bottom" ? "bottom" : "center",
           }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-        </div>
+        />
 
         <div className="relative h-full flex flex-col justify-end container-ikos pb-32 lg:pb-40">
           <h2 className="text-lg lg:text-xl font-light text-white mb-4 uppercase tracking-wider">
