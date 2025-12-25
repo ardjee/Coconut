@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface PageTemplateProps {
   category: string;
@@ -20,6 +20,13 @@ interface PageTemplateProps {
     hours?: string;
   };
   duplicateDetails?: boolean;
+  details2?: {
+    subtitle?: string;
+    info?: string;
+    hours?: string;
+  };
+  detailsImage2?: string;
+  galleryImages?: string[];
 }
 
 export function PageTemplate({
@@ -31,8 +38,18 @@ export function PageTemplate({
   description,
   details,
   duplicateDetails = false,
+  details2,
+  detailsImage2,
+  galleryImages = [
+    "/Coconut_1.18.1.jpg",
+    "/Coconut_1.17.1.jpg",
+    "/Coconut_1.20.1.jpg",
+    "/Coconut_1.25.1.jpg",
+  ],
 }: PageTemplateProps) {
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -51,6 +68,20 @@ export function PageTemplate({
 
     return () => observerRef.current?.disconnect();
   }, []);
+
+  const nextSlide = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentSlide((prev) => (prev + 1) % galleryImages.length);
+    setTimeout(() => setIsAnimating(false), 600);
+  };
+
+  const prevSlide = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentSlide((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+    setTimeout(() => setIsAnimating(false), 600);
+  };
 
   return (
     <div className="min-h-screen">
@@ -142,26 +173,26 @@ export function PageTemplate({
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                   <div className="order-2 lg:order-1">
                     <img
-                      src={detailsImage || heroImage}
+                      src={detailsImage2 || detailsImage || heroImage}
                       alt={title}
                       className="w-full h-96 object-cover rounded-2xl shadow-lg"
                     />
                   </div>
                   <div className="order-1 lg:order-2 text-center lg:text-left">
-                    {details.subtitle && (
+                    {(details2?.subtitle || details.subtitle) && (
                       <h3 className="text-2xl lg:text-3xl font-thin text-charcoal-200 mb-4 uppercase">
-                        {details.subtitle}
+                        {details2?.subtitle || details.subtitle}
                       </h3>
                     )}
-                    {details.info && (
+                    {(details2?.info || details.info) && (
                       <h4 className="text-lg lg:text-xl font-light text-charcoal-100 mb-6">
-                        {details.info}
+                        {details2?.info || details.info}
                       </h4>
                     )}
-                    {details.hours && (
+                    {(details2?.hours || details.hours) && (
                       <div className="mb-6">
                         <div className="text-sm text-charcoal-100 mb-2">
-                          <strong>Hours:</strong> {details.hours}
+                          <strong>Hours:</strong> {details2?.hours || details.hours}
                         </div>
                       </div>
                     )}
@@ -179,24 +210,95 @@ export function PageTemplate({
         </>
       )}
 
-      {/* Image Gallery Section */}
+      {/* Image Gallery Carousel Section */}
       <section className="py-20 lg:py-32 bg-sand-50">
         <div className="container-ikos">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              "/Coconut_1.18.1.jpg",
-              "/Coconut_1.17.1.jpg",
-              "/Coconut_1.20.1.jpg",
-              "/Coconut_1.25.1.jpg",
-            ].map((src, i) => (
-              <div key={i} className="aspect-square overflow-hidden rounded-2xl shadow-lg ikos-fade-up">
-                <img
-                  src={src}
-                  alt={`${title} ${i + 1}`}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
+          <div className="relative max-w-6xl mx-auto">
+            {/* Navigation Arrows */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-charcoal-200 p-2 rounded-full transition-all duration-300 shadow-md"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-charcoal-200 p-2 rounded-full transition-all duration-300 shadow-md"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
+            {/* Carousel Container */}
+            <div className="flex items-center justify-center gap-4 px-12">
+              {/* Previous Image (Left) */}
+              <div 
+                key={`prev-${currentSlide}`}
+                className="w-1/4 opacity-40 scale-90 transition-all duration-600 cursor-pointer hover:opacity-60 animate-fade-in rounded-2xl overflow-hidden"
+                onClick={prevSlide}
+              >
+                <div className="relative h-64 overflow-hidden rounded-2xl">
+                  <img
+                    src={galleryImages[(currentSlide - 1 + galleryImages.length) % galleryImages.length]}
+                    alt={`${title} ${(currentSlide - 1 + galleryImages.length) % galleryImages.length + 1}`}
+                    className="w-full h-full object-cover transition-transform duration-600 rounded-2xl"
+                  />
+                </div>
               </div>
-            ))}
+
+              {/* Current Image (Center) */}
+              <div 
+                key={`center-${currentSlide}`}
+                className="w-1/2 transition-all duration-600 animate-fade-in"
+              >
+                <div className="relative group overflow-hidden rounded-2xl">
+                  <div className="relative h-96 rounded-2xl overflow-hidden">
+                    <img
+                      src={galleryImages[currentSlide]}
+                      alt={`${title} ${currentSlide + 1}`}
+                      className="w-full h-full object-cover transition-transform duration-600 scale-105 animate-fade-in rounded-2xl"
+                      style={{ animation: 'fadeIn 0.6s ease-out' }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Next Image (Right) */}
+              <div 
+                key={`next-${currentSlide}`}
+                className="w-1/4 opacity-40 scale-90 transition-all duration-600 cursor-pointer hover:opacity-60 animate-fade-in rounded-2xl overflow-hidden"
+                onClick={nextSlide}
+              >
+                <div className="relative h-64 overflow-hidden rounded-2xl">
+                  <img
+                    src={galleryImages[(currentSlide + 1) % galleryImages.length]}
+                    alt={`${title} ${(currentSlide + 1) % galleryImages.length + 1}`}
+                    className="w-full h-full object-cover transition-transform duration-600 rounded-2xl"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Dots Indicator */}
+            <div className="flex justify-center gap-2 mt-6">
+              {galleryImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    if (!isAnimating) {
+                      setIsAnimating(true);
+                      setCurrentSlide(i);
+                      setTimeout(() => setIsAnimating(false), 600);
+                    }
+                  }}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    i === currentSlide ? "bg-charcoal-200 w-8" : "bg-charcoal-200/30"
+                  }`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
