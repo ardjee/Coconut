@@ -138,7 +138,7 @@ export function PageTemplate({
                   <img
                     src={detailsImage || heroImage}
                     alt={title}
-                    className="w-full h-96 object-cover object-right rounded-2xl shadow-lg"
+                    className="w-full h-96 object-contain object-center rounded-2xl shadow-lg"
                   />
                 </div>
                 <div className="order-1 lg:order-2 text-center lg:text-left">
