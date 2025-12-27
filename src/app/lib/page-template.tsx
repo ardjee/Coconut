@@ -27,6 +27,7 @@ interface PageTemplateProps {
   };
   detailsImage2?: string;
   galleryImages?: string[];
+  showGallery?: boolean;
 }
 
 export function PageTemplate({
@@ -46,6 +47,7 @@ export function PageTemplate({
     "/Coconut_1.20.1.jpg",
     "/Coconut_1.25.1.jpg",
   ],
+  showGallery = true,
 }: PageTemplateProps) {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -136,7 +138,7 @@ export function PageTemplate({
                   <img
                     src={detailsImage || heroImage}
                     alt={title}
-                    className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                    className="w-full h-96 object-cover object-right rounded-2xl shadow-lg"
                   />
                 </div>
                 <div className="order-1 lg:order-2 text-center lg:text-left">
@@ -211,6 +213,7 @@ export function PageTemplate({
       )}
 
       {/* Image Gallery Carousel Section */}
+      {showGallery && (
       <section className="py-20 lg:py-32 bg-sand-50">
         <div className="container-ikos">
           <div className="relative max-w-6xl mx-auto">
@@ -302,6 +305,7 @@ export function PageTemplate({
           </div>
         </div>
       </section>
+      )}
 
       <Footer />
     </div>
