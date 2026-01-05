@@ -6,10 +6,10 @@ export default function MassageWellnessPage() {
       category="Activities"
       title="Massage & Wellness"
       heroImage="/massage.png"
-      description="Relax and rejuvenate with our professional massage and wellness services. Our skilled therapists offer a range of treatments to help you unwind and restore balance."
+      description="Relax and rejuvenate with our massage therapists. Massages can be indoors or outdoors, choose what you like best."
       details={{
         subtitle: "Wellness & Relaxation",
-        info: "Professional therapists | Various treatments | Spa facilities",
+        info: "professional therapists | indoors and outdoors",
       }}
     />
   );

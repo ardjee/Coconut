@@ -50,6 +50,7 @@ export function PageTemplate({
   showGallery = true,
 }: PageTemplateProps) {
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const nextSectionRef = useRef<HTMLElement | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -85,6 +86,17 @@ export function PageTemplate({
     setTimeout(() => setIsAnimating(false), 600);
   };
 
+  const handleExploreClick = () => {
+    if (nextSectionRef.current) {
+      nextSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -109,7 +121,10 @@ export function PageTemplate({
         </div>
 
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="flex flex-col items-center text-white">
+          <div 
+            className="flex flex-col items-center text-white cursor-pointer hover:opacity-80 transition-opacity"
+            onClick={handleExploreClick}
+          >
             <span className="text-xs uppercase tracking-widest mb-2">Explore</span>
             <ChevronDown className="w-6 h-6" />
           </div>
@@ -117,7 +132,7 @@ export function PageTemplate({
       </section>
 
       {/* Section Header */}
-      <section className="py-20 lg:py-32 bg-white">
+      <section ref={nextSectionRef} className="py-20 lg:py-32 bg-white">
         <div className="container-ikos max-w-4xl text-center">
           <h2 className="text-3xl lg:text-4xl font-thin text-charcoal-200 mb-8 ikos-fade-up uppercase">
             {title}

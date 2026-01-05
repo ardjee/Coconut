@@ -9,7 +9,7 @@ export default function PoolTablePage() {
       description="Enjoy a game of pool in our recreation area. Challenge friends and family to a friendly match in a relaxed, comfortable setting."
       details={{
         subtitle: "Recreation",
-        info: "Professional pool table | Indoor recreation area | Available all day",
+        info: "Professional pool table | Available all day",
       }}
     />
   );
