@@ -13,6 +13,7 @@ interface PageTemplateProps {
   heroImage?: string;
   heroImagePosition?: "top" | "center" | "bottom";
   detailsImage?: string;
+  detailsImageObjectFit?: "contain" | "cover";
   description: string;
   details?: {
     subtitle?: string;
@@ -36,6 +37,7 @@ export function PageTemplate({
   heroImage = "/Coconut_1.18.1.jpg",
   heroImagePosition = "center",
   detailsImage,
+  detailsImageObjectFit = "contain",
   description,
   details,
   duplicateDetails = false,
@@ -153,7 +155,7 @@ export function PageTemplate({
                   <img
                     src={detailsImage || heroImage}
                     alt={title}
-                    className="w-full h-96 object-contain object-center rounded-2xl shadow-lg"
+                    className={`w-full h-[28rem] object-${detailsImageObjectFit} object-center rounded-2xl shadow-lg`}
                   />
                 </div>
                 <div className="order-1 lg:order-2 text-center lg:text-left">

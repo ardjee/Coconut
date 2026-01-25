@@ -5,12 +5,17 @@ export default function BodaBodaDrivesPage() {
     <PageTemplate
       category="Activities"
       title="Boda Boda Drives"
-      heroImage="/Coconut_1.17.1.jpg"
+      heroImage="/boda boda (AI).png"
       description="Explore the local area with our boda boda (motorcycle taxi) tours. Experience authentic local transportation while discovering the beautiful surroundings."
+      detailsImage="/boda boda (AI2).png"
       details={{
         subtitle: "Local Tours",
         info: "Guided tours | Local experience | Scenic routes",
       }}
+      galleryImages={[
+        "/boda boda (AI).png",
+        "/boda boda (AI2).png",
+      ]}
     />
   );
 }

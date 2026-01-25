@@ -5,13 +5,20 @@ export default function BarPage() {
     <PageTemplate
       category="Services"
       title="Bar"
-      heroImage="/bar2.jpg"
+      heroImage="/bar.png"
+      detailsImage="/bar2.jpg"
       description="Relax and unwind at our bar with a wide selection of drinks and cocktails. Enjoy the vibrant atmosphere and friendly service in a beautiful setting overlooking Lake Victoria."
       details={{
         subtitle: "Bar & Lounge",
         info: "Wide drink selection | Cocktails | Lakeside views",
         hours: "Daily: 10:00 - 23:00",
       }}
+      galleryImages={[
+        "/bar.png",
+        "/bar 3.png",
+        "/bar 4.png",
+        "/bar2.jpg",
+      ]}
     />
   );
 }

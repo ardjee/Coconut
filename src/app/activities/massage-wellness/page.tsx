@@ -5,7 +5,9 @@ export default function MassageWellnessPage() {
     <PageTemplate
       category="Activities"
       title="Massage & Wellness"
-      heroImage="/massage.png"
+      heroImage="/massage 1.png"
+      detailsImage="/massage 2.png"
+      detailsImageObjectFit="cover"
       description="Relax and rejuvenate with our massage therapists. Massages can be indoors or outdoors, choose what you like best."
       details={{
         subtitle: "Wellness & Relaxation",
