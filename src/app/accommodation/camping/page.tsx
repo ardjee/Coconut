@@ -5,7 +5,8 @@ export default function CampingPage() {
     <PageTemplate
       category="Accommodation"
       title="Camping"
-      heroImage="/camping 1.png"
+      heroImage="/camping (AI3).png"
+      heroImagePosition="top"
       detailsImage="/elephant 2.png"
       description="Experience the great outdoors with our camping facilities. Set up your tent in our designated camping area and enjoy the natural beauty of Lake Victoria while still having access to resort amenities."
       details={{

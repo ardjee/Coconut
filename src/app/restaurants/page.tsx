@@ -7,40 +7,40 @@ import Link from "next/link";
 
 const restaurants = [
   {
-    name: "Anaya",
-    cuisine: "Mediterranean",
-    image: "https://images.unsplash.com/photo-1414235077116-281a6c4d7e3e?q=80&w=800",
-    href: "/restaurants/anaya",
+    name: "Fish & Chips",
+    cuisine: "Seafood",
+    image: "/food (AI1).png",
+    href: "/restaurants/fish-and-chips",
   },
   {
-    name: "Fresco",
-    cuisine: "Italian",
-    image: "https://images.unsplash.com/photo-1515443961218-a51367888e4b?q=80&w=800",
-    href: "/restaurants/fresco",
+    name: "Chicken Diner",
+    cuisine: "American",
+    image: "/food (AI2).png",
+    href: "/restaurants/chicken-diner",
   },
   {
-    name: "Flavors",
-    cuisine: "Asian",
-    image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800",
-    href: "/restaurants/flavors",
+    name: "Pancakes",
+    cuisine: "Ugandan Style",
+    image: "/food (AI3).png",
+    href: "/restaurants/pancakes",
   },
   {
-    name: "Oliva",
-    cuisine: "Greek",
-    image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800",
-    href: "/restaurants/oliva",
+    name: "Pancakes",
+    cuisine: "American",
+    image: "/Food (AI4).png",
+    href: "/restaurants/pancakes-american",
   },
   {
-    name: "Provence",
-    cuisine: "French",
-    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800",
-    href: "/restaurants/provence",
+    name: "Fruit Platter",
+    cuisine: "Ugandan Fruit",
+    image: "/food (AI5).png",
+    href: "/restaurants/fruit-platter",
   },
   {
-    name: "Beach Club",
-    cuisine: "Casual Dining",
-    image: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?q=80&w=800",
-    href: "/restaurants/beach-club",
+    name: "Eggs & Fruit",
+    cuisine: "Breakfast",
+    image: "/food (AI6).png",
+    href: "/restaurants/eggs-and-fruit",
   },
 ];
 
@@ -56,7 +56,7 @@ export default function RestaurantsPage() {
             Restaurants & Bars
           </h1>
           <p className="text-lg text-charcoal-100 max-w-3xl mx-auto">
-            Discover world-class dining experiences at Coconut Beach
+            Enjoy a unique dining experience with our diverse menu made from local ingredients
           </p>
         </div>
       </section>
