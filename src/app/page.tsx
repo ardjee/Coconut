@@ -18,6 +18,7 @@ export default function Home() {
       title: "Luxury Pool Suite",
       subtitle: "Private Pool with Lake View",
       image: "/Coconut_1.18.1.jpg",
+      href: "/accommodation/upper-rooms",
     },
     {
       title: "Resort Accommodation",
@@ -52,7 +53,8 @@ export default function Home() {
     {
       title: "Spa Experience",
       subtitle: "Luxurious Spa Treatment Room",
-      image: "/massage.png",
+      image: "/massage 2.png",
+      href: "/activities/massage-wellness",
     },
   ];
 
@@ -244,7 +246,7 @@ export default function Home() {
                         size="sm"
                         className="bg-transparent border border-white text-white hover:bg-white hover:text-charcoal-200 transition-all duration-300 uppercase text-xs tracking-wider rounded-[3px]"
                       >
-                        <Link href="/accommodation">EXPLORE MORE</Link>
+                        <Link href={rooms[currentSlide]?.href || "/accommodation"}>EXPLORE MORE</Link>
                       </Button>
                     </div>
                   </div>
