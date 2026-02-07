@@ -13,6 +13,7 @@ export default function MassageWellnessPage() {
         subtitle: "Wellness & Relaxation",
         info: "professional therapists | indoors and outdoors",
       }}
+      showGallery={false}
     />
   );
 }

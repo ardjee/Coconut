@@ -422,12 +422,7 @@ export default function Home() {
           <p className="text-base text-charcoal-100 mb-8 ikos-fade-up">
             Coconut Beach is located next to Majanji, near the border of Kenya. the resort is located on the beach of lake Victoria
           </p>
-          <Button
-            asChild
-            className="bg-transparent border border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider px-8 mb-12"
-          >
-            <Link href="#map">Getting Here</Link>
-          </Button>
+
         </div>
         
         {/* Google Maps Embed */}

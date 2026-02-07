@@ -12,6 +12,7 @@ export default function PoolTablePage() {
         subtitle: "Recreation",
         info: "Professional pool table | Available all day",
       }}
+      showGallery={false}
     />
   );
 }
