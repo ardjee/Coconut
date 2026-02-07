@@ -152,9 +152,9 @@ function PricingTable({
       <table className="w-full text-left">
         <thead>
           <tr className="border-b border-sand-300">
-            <th className="py-4 pr-4 text-xs uppercase tracking-wider text-charcoal-100 font-medium w-[30%]">
-              Item
-            </th>
+             <th className="py-4 pr-4 text-xs uppercase tracking-wider text-charcoal-100 font-medium w-[40%]">
+                Item
+              </th>
             <th className="py-4 pr-4 text-xs uppercase tracking-wider text-charcoal-100 font-medium hidden md:table-cell">
               Description
             </th>
