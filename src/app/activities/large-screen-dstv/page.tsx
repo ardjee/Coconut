@@ -11,6 +11,7 @@ export default function LargeScreenDSTVPage() {
         subtitle: "Entertainment",
         info: "Large screen TV | DSTV channels | Comfortable viewing area",
       }}
+      showGallery={false}
     />
   );
 }

@@ -12,6 +12,7 @@ export default function BeachVolleyballPage() {
         subtitle: "Beach Sports",
         info: "Beach volleyball court | Equipment provided | Group activities",
       }}
+      showGallery={false}
     />
   );
 }

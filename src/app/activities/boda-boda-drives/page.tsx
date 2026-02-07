@@ -12,10 +12,7 @@ export default function BodaBodaDrivesPage() {
         subtitle: "Local Tours",
         info: "Guided tours | Local experience | Scenic routes",
       }}
-      galleryImages={[
-        "/boda boda (AI).png",
-        "/boda boda (AI2).png",
-      ]}
+      showGallery={false}
     />
   );
 }

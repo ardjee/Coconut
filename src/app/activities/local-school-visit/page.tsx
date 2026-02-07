@@ -12,12 +12,7 @@ export default function LocalSchoolVisitPage() {
         subtitle: "Community Engagement",
         info: "Cultural exchange | Educational experience | Community connection",
       }}
-      galleryImages={[
-        "/School.band.jpeg",
-        "/School.png",
-        "/Coconut_1.18.1.jpg",
-        "/Coconut_1.25.1.jpg",
-      ]}
+      showGallery={false}
     />
   );
 }

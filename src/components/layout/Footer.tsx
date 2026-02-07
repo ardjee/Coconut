@@ -5,20 +5,6 @@ const footerLinks = [
   { name: "Contact", href: "/contact" },
   { name: "News", href: "/news" },
   { name: "Gallery", href: "/gallery" },
-  { name: "Sustainability", href: "/sustainability" },
-  { name: "Weddings", href: "/weddings" },
-  { name: "Careers", href: "/careers" },
-  {
-    name: "Legal",
-    href: "#",
-    submenu: [
-      { name: "Disclaimer", href: "/legal/disclaimer" },
-      { name: "T&Cs", href: "/legal/terms" },
-      { name: "Privacy Policy", href: "/legal/privacy" },
-      { name: "Cookies Policy", href: "/legal/cookies" },
-    ],
-  },
-  { name: "Accessibility", href: "/accessibility" },
 ];
 
 export function Footer() {
@@ -50,21 +36,6 @@ export function Footer() {
                   {link.name}
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full" />
                 </Link>
-                {link.submenu && (
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                    <div className="bg-white/95 backdrop-blur-sm shadow-lg py-2 px-4 min-w-[200px]">
-                      {link.submenu.map((subitem) => (
-                        <Link
-                          key={subitem.name}
-                          href={subitem.href}
-                          className="block py-2 text-xs text-charcoal-200 hover:text-charcoal-100 transition-colors"
-                        >
-                          {subitem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
             ))}
           </nav>
