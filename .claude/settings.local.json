@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx next build:*)",
+      "Bash(npx tsc:*)",
+      "Bash(git status:*)",
+      "Bash(del \"\\\\?\\\\c:\\\\Users\\\\rvesp\\\\OneDrive\\\\Claude\\\\CoconutBeach\\\\coconutbeach\\\\nul\")",
+      "Bash(cmd //c \"del \\\\\\\\?\\\\c:\\\\Users\\\\rvesp\\\\OneDrive\\\\Claude\\\\CoconutBeach\\\\coconutbeach\\\\nul\")",
+      "Bash(cmd /c \"del /f \"\"\\\\?\\\\c:\\\\Users\\\\rvesp\\\\OneDrive\\\\Claude\\\\CoconutBeach\\\\coconutbeach\\\\nul\"\"\")",
+      "Bash(python3:*)"
+    ]
+  }
+}
