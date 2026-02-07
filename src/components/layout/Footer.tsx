@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Facebook, Instagram, Youtube } from "lucide-react";
 
 const footerLinks = [
   { name: "Contact", href: "/contact" },
@@ -40,33 +39,7 @@ export function Footer() {
             ))}
           </nav>
 
-          {/* Social Media */}
-          <div className="flex justify-center gap-4 mb-8">
-            <Link
-              href="https://www.instagram.com/ikosresorts/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
-            >
-              <Instagram className="w-5 h-5" />
-            </Link>
-            <Link
-              href="https://www.facebook.com/ikosresorts"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
-            >
-              <Facebook className="w-5 h-5" />
-            </Link>
-            <Link
-              href="https://www.youtube.com/user/ikosresortsofficial"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
-            >
-              <Youtube className="w-5 h-5" />
-            </Link>
-          </div>
+
 
           {/* Copyright */}
           <div className="text-center">
