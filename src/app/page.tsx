@@ -90,6 +90,14 @@ export default function Home() {
     return () => observerRef.current?.disconnect();
   }, []);
 
+  // Auto-rotate carousel every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % rooms.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [rooms.length]);
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -190,25 +198,25 @@ export default function Home() {
             {/* Navigation Arrows */}
             <button
               onClick={prevSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-charcoal-200 p-2 rounded-full transition-all duration-300 shadow-md"
+              className="absolute left-1 md:left-0 top-1/2 -translate-y-1/2 z-10 bg-white/40 md:bg-white/80 hover:bg-white text-charcoal-200 p-1 md:p-2 rounded-full transition-all duration-300 shadow-sm md:shadow-md"
               aria-label="Previous slide"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-charcoal-200 p-2 rounded-full transition-all duration-300 shadow-md"
+              className="absolute right-1 md:right-0 top-1/2 -translate-y-1/2 z-10 bg-white/40 md:bg-white/80 hover:bg-white text-charcoal-200 p-1 md:p-2 rounded-full transition-all duration-300 shadow-sm md:shadow-md"
               aria-label="Next slide"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
             </button>
 
             {/* Carousel Container */}
-            <div className="flex items-center justify-center gap-4 px-12">
+            <div className="flex items-center justify-center gap-0 md:gap-4 px-8 md:px-12">
               {/* Previous Image (Left) */}
-              <div 
+              <div
                 key={`prev-${currentSlide}`}
-                className="w-1/4 opacity-40 scale-90 transition-all duration-600 cursor-pointer hover:opacity-60 animate-fade-in rounded-2xl overflow-hidden"
+                className="hidden md:block w-1/4 opacity-40 scale-90 transition-all duration-600 cursor-pointer hover:opacity-60 animate-fade-in rounded-2xl overflow-hidden"
                 onClick={prevSlide}
               >
                 <div className="relative h-64 overflow-hidden rounded-2xl">
@@ -221,12 +229,12 @@ export default function Home() {
               </div>
 
               {/* Current Image (Center) */}
-              <div 
+              <div
                 key={`center-${currentSlide}`}
-                className="w-1/2 transition-all duration-600 animate-fade-in"
+                className="w-full md:w-1/2 transition-all duration-600 animate-fade-in"
               >
                 <div className="relative group overflow-hidden rounded-2xl">
-                  <div className="relative h-96 rounded-2xl overflow-hidden">
+                  <div className="relative h-72 md:h-96 rounded-2xl overflow-hidden">
                     <img
                       src={rooms[currentSlide].image}
                       alt={rooms[currentSlide].title}
@@ -235,12 +243,6 @@ export default function Home() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-2xl" />
                     <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                      <p className="text-xs uppercase tracking-wider mb-2">FROM OUR SUITES</p>
-                      <h4 className="text-sm font-light mb-4">
-                        {rooms[currentSlide].title}
-                        <br />
-                        {rooms[currentSlide].subtitle}
-                      </h4>
                       <Button
                         asChild
                         size="sm"
@@ -254,9 +256,9 @@ export default function Home() {
               </div>
 
               {/* Next Image (Right) */}
-              <div 
+              <div
                 key={`next-${currentSlide}`}
-                className="w-1/4 opacity-40 scale-90 transition-all duration-600 cursor-pointer hover:opacity-60 animate-fade-in rounded-2xl overflow-hidden"
+                className="hidden md:block w-1/4 opacity-40 scale-90 transition-all duration-600 cursor-pointer hover:opacity-60 animate-fade-in rounded-2xl overflow-hidden"
                 onClick={nextSlide}
               >
                 <div className="relative h-64 overflow-hidden rounded-2xl">
