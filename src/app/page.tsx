@@ -7,12 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { ImageSequenceHero } from "@/components/home/ImageSequenceHero";
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  
+
   const rooms = [
     {
       title: "Luxury Pool Suite",
@@ -103,16 +104,14 @@ export default function Home() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative h-screen w-full overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('/Coconut_1.18.1.jpg')",
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-        </div>
-
+      <ImageSequenceHero
+        folderPath="/hero-png"
+        fileNamePrefix="ezgif-frame-"
+        fileExtension="png"
+        frameCount={215}
+        fps={30}
+        fallbackImage="/hero-png/ezgif-frame-001.png"
+      >
         <div className="relative h-full flex flex-col justify-end container-ikos pb-32 lg:pb-40">
           <h1 className="text-4xl lg:text-4xl font-thin text-white mb-4 animate-fade-in uppercase tracking-wide">
             COCONUT BEACH
@@ -128,7 +127,7 @@ export default function Home() {
             <ChevronDown className="w-6 h-6" />
           </div>
         </div>
-      </section>
+      </ImageSequenceHero>
 
       {/* Section Header */}
       <section className="py-20 lg:py-32 bg-white">
@@ -283,9 +282,8 @@ export default function Home() {
                       setTimeout(() => setIsAnimating(false), 600);
                     }
                   }}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    i === currentSlide ? "bg-charcoal-200 w-8" : "bg-charcoal-200/30"
-                  }`}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${i === currentSlide ? "bg-charcoal-200 w-8" : "bg-charcoal-200/30"
+                    }`}
                   aria-label={`Go to slide ${i + 1}`}
                 />
               ))}
@@ -319,13 +317,13 @@ export default function Home() {
                 <img
                   src={
                     i === 1 ? "/cheers.png" :
-                    i === 2 ? "/bar2.jpg" :
-                    ""
+                      i === 2 ? "/bar2.jpg" :
+                        ""
                   }
                   alt={
                     i === 1 ? "Cheers" :
-                    i === 2 ? "Bar" :
-                    ""
+                      i === 2 ? "Bar" :
+                        ""
                   }
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 rounded-2xl"
                 />
@@ -428,7 +426,7 @@ export default function Home() {
           </p>
 
         </div>
-        
+
         {/* Google Maps Embed */}
         <div className="container-ikos max-w-4xl mt-12 mx-auto">
           <div className="ikos-fade-up">
