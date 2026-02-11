@@ -157,17 +157,30 @@ export function ImageSequenceHero({
 
     // Animation Loop
     const animate = useCallback((time: number) => {
-        if (!lastFrameTimeRef.current) lastFrameTimeRef.current = time;
+        if (!lastFrameTimeRef.current) {
+            lastFrameTimeRef.current = time;
+        }
 
         const deltaTime = time - lastFrameTimeRef.current;
 
         if (deltaTime >= frameInterval) {
             const seqLength = sequenceImagesRef.current.length;
             if (seqLength > 0) {
+                // Determine how many frames to advance (at least 1, but could be more if lag)
+                // However, for cinematic feel, we usually just want to play the next one
+                // To prevent "speed up" or "catch up" burst, we just advance 1.
                 drawFrame(frameIndexRef.current);
                 frameIndexRef.current = (frameIndexRef.current + 1) % seqLength;
             }
-            lastFrameTimeRef.current = time - (deltaTime % frameInterval);
+
+            // Adjust lastFrameTime. 
+            // If deltaTime is massive (e.g. backgrounded tab), we reset to current time
+            // to avoid playing through frames at light speed.
+            if (deltaTime > frameInterval * 2) {
+                lastFrameTimeRef.current = time;
+            } else {
+                lastFrameTimeRef.current = time - (deltaTime % frameInterval);
+            }
         }
 
         requestRef.current = requestAnimationFrame(animate);
@@ -176,6 +189,11 @@ export function ImageSequenceHero({
     // Start animation when loaded
     useEffect(() => {
         if (isLoaded && !loadError) {
+            // Reset timing when the loop starts/restarts
+            lastFrameTimeRef.current = performance.now();
+
+            // Ensure any existing loop is stopped
+            if (requestRef.current) cancelAnimationFrame(requestRef.current);
             requestRef.current = requestAnimationFrame(animate);
         }
         return () => {
