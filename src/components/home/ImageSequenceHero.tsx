@@ -1,4 +1,4 @@
-"use client";
+use client;
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
@@ -23,21 +23,16 @@ export function ImageSequenceHero({
     const containerRef = useRef<HTMLDivElement>(null);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    // Using refs for animation state to avoid React re-renders which would be too slow
     const imagesRef = useRef<HTMLImageElement[]>([]);
     const requestRef = useRef<number | null>(null);
     const frameIndexRef = useRef(0);
     const lastFrameTimeRef = useRef(0);
     const frameInterval = 1000 / fps;
 
-    // chunkConfig defines when to start and stop loading each clip
-    // Clip 1 starts immediately. 
-    // We start loading Clip 2 much earlier (frame 20) to give it the full duration of Clip 1 to download.
-    // We start loading Clip 3 when Clip 2 starts (frame 240).
     const chunks = [
         { start: 0, end: Math.min(239, frameCount - 1), loadTrigger: 0 },
-        { start: 240, end: Math.min(479, frameCount - 1), loadTrigger: 20 }, // Increased lead time!
-        { start: 480, end: Math.min(629, frameCount - 1), loadTrigger: 240 }, // Increased lead time!
+        { start: 240, end: Math.min(479, frameCount - 1), loadTrigger: 20 },
+        { start: 480, end: Math.min(629, frameCount - 1), loadTrigger: 240 },
     ];
 
     const loadedChunksRef = useRef<Set<number>>(new Set());
@@ -55,7 +50,6 @@ export function ImageSequenceHero({
             imagesRef.current[i] = img;
         }
 
-        // Start playing when the first chunk is ready (or at least first few frames)
         if (chunkIndex === 0) {
             const checkFirstChunk = setInterval(() => {
                 const firstChunk = chunks[0];
@@ -74,7 +68,6 @@ export function ImageSequenceHero({
         }
     }, [resolvePath, frameCount]);
 
-    // Initial load
     useEffect(() => {
         loadChunk(0);
         return () => {
@@ -88,10 +81,8 @@ export function ImageSequenceHero({
         const container = containerRef.current;
         const img = imagesRef.current[index];
 
-        // If not loaded yet, wait (return false)
+        if (!container || !img) return false;
         if (!img.complete) return false;
-
-        // If failed to load (complete but no width), skip it (return true to advance, but don't draw)
         if (img.naturalWidth === 0) return true;
 
         const dpr = window.devicePixelRatio || 1;
@@ -136,7 +127,6 @@ export function ImageSequenceHero({
             const currentIndex = frameIndexRef.current;
             const nextIndex = (currentIndex + 1) % frameCount;
 
-            // Check if we need to trigger next chunk loading
             chunks.forEach((chunk, idx) => {
                 if (currentIndex === chunk.loadTrigger && idx + 1 < chunks.length) {
                     loadChunk(idx + 1);
