@@ -38,7 +38,7 @@ export function ImageSequenceHero({
     // Preload images
     useEffect(() => {
         let isMounted = true;
-        const preloadCount = Math.min(30, frameCount); // Preload first 30 frames before starting
+        const startThreshold = Math.min(60, frameCount); // Wait for more frames for a smoother start
         const images: HTMLImageElement[] = [];
 
         const loadNext = (index: number) => {
@@ -48,15 +48,7 @@ export function ImageSequenceHero({
             const frameNumber = (index + 1).toString().padStart(3, "0");
             img.src = `${folderPath}/${fileNamePrefix}${frameNumber}.${fileExtension}`;
 
-            img.onload = () => {
-                if (!isMounted) return;
-                // Images are added to the general collection
-            };
-
-            img.onerror = () => {
-                // Missing frames are handled by filtering later
-            };
-
+            // We don't need onload/onerror here as much because we check .complete in the loop
             images[index] = img;
         };
 
@@ -68,58 +60,57 @@ export function ImageSequenceHero({
 
         // Check loading status
         const checkLoading = setInterval(() => {
+            if (!isMounted) return;
+
+            // Count how many are ready
             let readyCount = 0;
-            for (let i = 0; i < preloadCount; i++) {
-                if (images[i] && (images[i].complete || images[i].naturalWidth > 0)) {
+            for (let i = 0; i < frameCount; i++) {
+                if (images[i] && images[i].complete && images[i].naturalWidth > 0) {
                     readyCount++;
                 }
             }
 
-            if (readyCount >= Math.min(5, preloadCount)) {
-                sequenceImagesRef.current = images.filter(img => img && img.complete && img.naturalWidth > 0);
-
-                if (sequenceImagesRef.current.length > 0) {
-                    setIsLoaded(true);
-                    clearInterval(checkLoading);
-                }
+            // Start when threshold is reached
+            if (readyCount >= startThreshold || readyCount === frameCount) {
+                setIsLoaded(true);
+                clearInterval(checkLoading);
             }
-        }, 100);
-
-        // Periodically refresh the sequence as more images load in the background
-        const refreshSequence = setInterval(() => {
-            if (isMounted) {
-                sequenceImagesRef.current = images.filter(img => img && img.complete && img.naturalWidth > 0);
-            }
-        }, 2000);
+        }, 200);
 
         // Fallback timeout
         const timeout = setTimeout(() => {
-            if (!isLoaded) {
-                setLoadError(true);
+            if (isMounted && !isLoaded) {
+                // If we have at least frame 1, let's try to start anyway
+                if (images[0] && images[0].complete) {
+                    setIsLoaded(true);
+                } else {
+                    setLoadError(true);
+                }
             }
-        }, 5000);
+        }, 10000);
 
         return () => {
             isMounted = false;
             clearInterval(checkLoading);
-            clearInterval(refreshSequence);
             clearTimeout(timeout);
             if (requestRef.current) cancelAnimationFrame(requestRef.current);
         };
-    }, [folderPath, fileNamePrefix, fileExtension, frameCount, fps, isLoaded]);
+    }, [folderPath, fileNamePrefix, fileExtension, frameCount, fps]);
 
     // Draw frame logic
     const drawFrame = useCallback((index: number) => {
         const canvas = canvasRef.current;
         const ctx = canvas?.getContext("2d");
         const container = containerRef.current;
-        const sequence = sequenceImagesRef.current;
+        const images = imagesRef.current;
 
-        if (sequence.length === 0) return;
-
-        const img = sequence[index % sequence.length];
+        // Use the index directly from the fixed-size array
+        const img = images[index % frameCount];
 
         if (!canvas || !ctx || !img || !container) return;
+
+        // Ensure image is actually loaded before drawing
+        if (!img.complete || img.naturalWidth === 0) return false;
 
         const dpr = window.devicePixelRatio || 1;
         const rect = container.getBoundingClientRect();
@@ -153,7 +144,8 @@ export function ImageSequenceHero({
         }
 
         ctx.drawImage(img, offsetX, offsetY, renderWidth, renderHeight);
-    }, []);
+        return true;
+    }, [frameCount]);
 
     // Animation Loop
     const animate = useCallback((time: number) => {
@@ -164,27 +156,28 @@ export function ImageSequenceHero({
         const deltaTime = time - lastFrameTimeRef.current;
 
         if (deltaTime >= frameInterval) {
-            const seqLength = sequenceImagesRef.current.length;
-            if (seqLength > 0) {
-                // Determine how many frames to advance (at least 1, but could be more if lag)
-                // However, for cinematic feel, we usually just want to play the next one
-                // To prevent "speed up" or "catch up" burst, we just advance 1.
-                drawFrame(frameIndexRef.current);
-                frameIndexRef.current = (frameIndexRef.current + 1) % seqLength;
-            }
+            // Attempt to draw the next frame
+            // If drawFrame returns false (image not loaded), we "stall" on the current frame
+            const nextFrameIndex = (frameIndexRef.current + 1) % frameCount;
+            const success = drawFrame(nextFrameIndex);
 
-            // Adjust lastFrameTime. 
-            // If deltaTime is massive (e.g. backgrounded tab), we reset to current time
-            // to avoid playing through frames at light speed.
-            if (deltaTime > frameInterval * 2) {
-                lastFrameTimeRef.current = time;
+            if (success) {
+                frameIndexRef.current = nextFrameIndex;
+
+                // Adjust lastFrameTime for consistent FPS
+                if (deltaTime > frameInterval * 2) {
+                    lastFrameTimeRef.current = time;
+                } else {
+                    lastFrameTimeRef.current = time - (deltaTime % frameInterval);
+                }
             } else {
-                lastFrameTimeRef.current = time - (deltaTime % frameInterval);
+                // Image not ready? Don't advance index, but keep trying in next RAF
+                // We don't update lastFrameTimeRef here so we attempt again as soon as possible
             }
         }
 
         requestRef.current = requestAnimationFrame(animate);
-    }, [frameInterval, drawFrame]);
+    }, [frameInterval, drawFrame, frameCount]);
 
     // Start animation when loaded
     useEffect(() => {
