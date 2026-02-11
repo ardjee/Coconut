@@ -5,112 +5,94 @@ import Image from "next/image";
 
 interface ImageSequenceHeroProps {
     folderPath: string;
-    fileNamePrefix: string;
-    fileExtension: string;
     frameCount: number;
     fps?: number;
     fallbackImage: string;
+    resolvePath: (index: number) => string;
     children?: React.ReactNode;
 }
 
 export function ImageSequenceHero({
-    folderPath,
-    fileNamePrefix,
-    fileExtension,
     frameCount,
     fps = 30,
     fallbackImage,
+    resolvePath,
     children,
 }: ImageSequenceHeroProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [loadError, setLoadError] = useState(false);
 
-    // Refs for animation state to avoid re-renders
+    // Using refs for animation state to avoid React re-renders which would be too slow
     const imagesRef = useRef<HTMLImageElement[]>([]);
-    const sequenceImagesRef = useRef<HTMLImageElement[]>([]);
     const requestRef = useRef<number | null>(null);
     const frameIndexRef = useRef(0);
     const lastFrameTimeRef = useRef(0);
     const frameInterval = 1000 / fps;
 
-    // Preload images
-    useEffect(() => {
-        let isMounted = true;
-        const startThreshold = Math.min(60, frameCount); // Wait for more frames for a smoother start
-        const images: HTMLImageElement[] = [];
+    // chunkConfig defines when to start and stop loading each clip
+    // Clip 1 starts immediately. 
+    // We start loading Clip 2 much earlier (frame 20) to give it the full duration of Clip 1 to download.
+    // We start loading Clip 3 when Clip 2 starts (frame 240).
+    const chunks = [
+        { start: 0, end: Math.min(239, frameCount - 1), loadTrigger: 0 },
+        { start: 240, end: Math.min(479, frameCount - 1), loadTrigger: 20 }, // Increased lead time!
+        { start: 480, end: Math.min(629, frameCount - 1), loadTrigger: 240 }, // Increased lead time!
+    ];
 
-        const loadNext = (index: number) => {
-            if (!isMounted) return;
+    const loadedChunksRef = useRef<Set<number>>(new Set());
 
+    const loadChunk = useCallback((chunkIndex: number) => {
+        if (loadedChunksRef.current.has(chunkIndex)) return;
+        loadedChunksRef.current.add(chunkIndex);
+
+        const chunk = chunks[chunkIndex];
+        if (!chunk) return;
+
+        for (let i = chunk.start; i <= chunk.end; i++) {
             const img = new window.Image();
-            const frameNumber = (index + 1).toString().padStart(3, "0");
-            img.src = `${folderPath}/${fileNamePrefix}${frameNumber}.${fileExtension}`;
-
-            // We don't need onload/onerror here as much because we check .complete in the loop
-            images[index] = img;
-        };
-
-        // Initialize array
-        for (let i = 0; i < frameCount; i++) {
-            loadNext(i);
+            img.src = resolvePath(i);
+            imagesRef.current[i] = img;
         }
-        imagesRef.current = images;
 
-        // Check loading status
-        const checkLoading = setInterval(() => {
-            if (!isMounted) return;
+        // Start playing when the first chunk is ready (or at least first few frames)
+        if (chunkIndex === 0) {
+            const checkFirstChunk = setInterval(() => {
+                const firstChunk = chunks[0];
+                let readyCount = 0;
+                const threshold = Math.min(30, firstChunk.end + 1);
 
-            // Count how many are ready
-            let readyCount = 0;
-            for (let i = 0; i < frameCount; i++) {
-                if (images[i] && images[i].complete && images[i].naturalWidth > 0) {
-                    readyCount++;
+                for (let i = firstChunk.start; i <= firstChunk.end; i++) {
+                    if (imagesRef.current[i]?.complete) readyCount++;
                 }
-            }
 
-            // Start when threshold is reached
-            if (readyCount >= startThreshold || readyCount === frameCount) {
-                setIsLoaded(true);
-                clearInterval(checkLoading);
-            }
-        }, 200);
-
-        // Fallback timeout
-        const timeout = setTimeout(() => {
-            if (isMounted && !isLoaded) {
-                // If we have at least frame 1, let's try to start anyway
-                if (images[0] && images[0].complete) {
+                if (readyCount >= threshold) {
                     setIsLoaded(true);
-                } else {
-                    setLoadError(true);
+                    clearInterval(checkFirstChunk);
                 }
-            }
-        }, 10000);
+            }, 100);
+        }
+    }, [resolvePath, frameCount]);
 
+    // Initial load
+    useEffect(() => {
+        loadChunk(0);
         return () => {
-            isMounted = false;
-            clearInterval(checkLoading);
-            clearTimeout(timeout);
             if (requestRef.current) cancelAnimationFrame(requestRef.current);
         };
-    }, [folderPath, fileNamePrefix, fileExtension, frameCount, fps]);
+    }, [loadChunk]);
 
-    // Draw frame logic
     const drawFrame = useCallback((index: number) => {
         const canvas = canvasRef.current;
         const ctx = canvas?.getContext("2d");
         const container = containerRef.current;
-        const images = imagesRef.current;
+        const img = imagesRef.current[index];
 
-        // Use the index directly from the fixed-size array
-        const img = images[index % frameCount];
+        // If not loaded yet, wait (return false)
+        if (!img.complete) return false;
 
-        if (!canvas || !ctx || !img || !container) return;
-
-        // Ensure image is actually loaded before drawing
-        if (!img.complete || img.naturalWidth === 0) return false;
+        // If failed to load (complete but no width), skip it (return true to advance, but don't draw)
+        if (img.naturalWidth === 0) return true;
 
         const dpr = window.devicePixelRatio || 1;
         const rect = container.getBoundingClientRect();
@@ -130,7 +112,6 @@ export function ImageSequenceHero({
         const canvasRatio = rect.width / rect.height;
 
         let renderWidth, renderHeight, offsetX, offsetY;
-
         if (canvasRatio > imgRatio) {
             renderWidth = rect.width;
             renderHeight = rect.width / imgRatio;
@@ -145,92 +126,50 @@ export function ImageSequenceHero({
 
         ctx.drawImage(img, offsetX, offsetY, renderWidth, renderHeight);
         return true;
-    }, [frameCount]);
+    }, []);
 
-    // Animation Loop
     const animate = useCallback((time: number) => {
-        if (!lastFrameTimeRef.current) {
-            lastFrameTimeRef.current = time;
-        }
-
+        if (!lastFrameTimeRef.current) lastFrameTimeRef.current = time;
         const deltaTime = time - lastFrameTimeRef.current;
 
         if (deltaTime >= frameInterval) {
-            // Attempt to draw the next frame
-            // If drawFrame returns false (image not loaded), we "stall" on the current frame
-            const nextFrameIndex = (frameIndexRef.current + 1) % frameCount;
-            const success = drawFrame(nextFrameIndex);
+            const currentIndex = frameIndexRef.current;
+            const nextIndex = (currentIndex + 1) % frameCount;
 
-            if (success) {
-                frameIndexRef.current = nextFrameIndex;
-
-                // Adjust lastFrameTime for consistent FPS
-                if (deltaTime > frameInterval * 2) {
-                    lastFrameTimeRef.current = time;
-                } else {
-                    lastFrameTimeRef.current = time - (deltaTime % frameInterval);
+            // Check if we need to trigger next chunk loading
+            chunks.forEach((chunk, idx) => {
+                if (currentIndex === chunk.loadTrigger && idx + 1 < chunks.length) {
+                    loadChunk(idx + 1);
                 }
-            } else {
-                // Image not ready? Don't advance index, but keep trying in next RAF
-                // We don't update lastFrameTimeRef here so we attempt again as soon as possible
+            });
+
+            const success = drawFrame(nextIndex);
+            if (success) {
+                frameIndexRef.current = nextIndex;
+                lastFrameTimeRef.current = time - (deltaTime % frameInterval);
             }
         }
-
         requestRef.current = requestAnimationFrame(animate);
-    }, [frameInterval, drawFrame, frameCount]);
+    }, [frameInterval, frameCount, drawFrame, loadChunk]);
 
-    // Start animation when loaded
     useEffect(() => {
-        if (isLoaded && !loadError) {
-            // Reset timing when the loop starts/restarts
+        if (isLoaded) {
             lastFrameTimeRef.current = performance.now();
-
-            // Ensure any existing loop is stopped
-            if (requestRef.current) cancelAnimationFrame(requestRef.current);
             requestRef.current = requestAnimationFrame(animate);
         }
         return () => {
             if (requestRef.current) cancelAnimationFrame(requestRef.current);
         };
-    }, [isLoaded, loadError, animate]);
-
-    // Handle Resize
-    useEffect(() => {
-        const handleResize = () => {
-            if (isLoaded && !loadError) {
-                drawFrame(frameIndexRef.current);
-            }
-        };
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [isLoaded, loadError, drawFrame]);
+    }, [isLoaded, animate]);
 
     return (
         <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-black">
-            <div
-                className={`absolute inset-0 transition-opacity duration-1000 ${isLoaded && !loadError ? 'opacity-0' : 'opacity-100'}`}
-                style={{ zIndex: 0 }}
-            >
-                <Image
-                    src={fallbackImage}
-                    alt="Hero Background"
-                    fill
-                    className="object-cover"
-                    priority
-                />
+            <div className={`absolute inset-0 transition-opacity duration-1000 ${isLoaded ? 'opacity-0' : 'opacity-100'}`} style={{ zIndex: 0 }}>
+                <Image src={fallbackImage} alt="Hero Background" fill className="object-cover" priority />
             </div>
-
-            <canvas
-                ref={canvasRef}
-                className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${isLoaded && !loadError ? 'opacity-100' : 'opacity-0'}`}
-                style={{ zIndex: 1 }}
-            />
-
+            <canvas ref={canvasRef} className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ zIndex: 1 }} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" style={{ zIndex: 2 }} />
-
-            <div className="relative h-full w-full" style={{ zIndex: 10 }}>
-                {children}
-            </div>
+            <div className="relative h-full w-full" style={{ zIndex: 10 }}>{children}</div>
         </section>
     );
 }

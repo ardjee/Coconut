@@ -106,11 +106,23 @@ export default function Home() {
       {/* Hero Section */}
       <ImageSequenceHero
         folderPath="/hero-png"
-        fileNamePrefix="ezgif-frame-"
-        fileExtension="png"
-        frameCount={215}
-        fps={30}
-        fallbackImage="/hero-png/ezgif-frame-001.png"
+        frameCount={577}
+        fps={15}
+        fallbackImage="/hero-png/1  (1).png"
+        resolvePath={(index) => {
+          // Clip 1: 1 (1) -> 1 (239) [Indices 0-238]
+          if (index < 239) {
+            return `/hero-png/1  (${index + 1}).png`;
+          }
+          // Clip 2: 2 (2) -> 2 (240) [Indices 239-477] (Skipping 2 (1))
+          else if (index < 478) {
+            return `/hero-png/2  (${index - 239 + 2}).png`;
+          }
+          // Clip 3: 3 (1) -> 3 (99) [Indices 478-576] (Only has 99 frames)
+          else {
+            return `/hero-png/3  (${index - 478 + 1}).png`;
+          }
+        }}
       >
         <div className="relative h-full flex flex-col justify-end container-ikos pb-32 lg:pb-40">
           <h1 className="text-4xl lg:text-4xl font-thin text-white mb-4 animate-fade-in uppercase tracking-wide">
