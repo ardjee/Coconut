@@ -88,6 +88,8 @@ export function ImageSequenceHero({
         const container = containerRef.current;
         const img = imagesRef.current[index];
 
+        if (!container || !canvas || !ctx) return false;
+
         // If not loaded yet, wait (return false)
         if (!img.complete) return false;
 
