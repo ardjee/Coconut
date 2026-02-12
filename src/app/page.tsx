@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { ImageSequenceHero } from "@/components/home/ImageSequenceHero";
+import { VideoHero } from "@/components/home/VideoHero";
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -104,25 +104,9 @@ export default function Home() {
       <Header />
 
       {/* Hero Section */}
-      <ImageSequenceHero
-        folderPath="/hero-png"
-        frameCount={577}
-        fps={15}
-        fallbackImage="/hero-png/1  (1).png"
-        resolvePath={(index) => {
-          // Clip 1: 1 (1) -> 1 (239) [Indices 0-238]
-          if (index < 239) {
-            return `/hero-png/1  (${index + 1}).png`;
-          }
-          // Clip 2: 2 (2) -> 2 (240) [Indices 239-477] (Skipping 2 (1))
-          else if (index < 478) {
-            return `/hero-png/2  (${index - 239 + 2}).png`;
-          }
-          // Clip 3: 3 (1) -> 3 (99) [Indices 478-576] (Only has 99 frames)
-          else {
-            return `/hero-png/3  (${index - 478 + 1}).png`;
-          }
-        }}
+      <VideoHero
+        videoSrc="/hero/hero-light.mp4"
+        posterImage="/hero1.png"
       >
         <div className="relative h-full flex flex-col justify-end container-ikos pb-32 lg:pb-40">
           <h1 className="text-4xl lg:text-4xl font-thin text-white mb-4 animate-fade-in uppercase tracking-wide">
@@ -139,7 +123,7 @@ export default function Home() {
             <ChevronDown className="w-6 h-6" />
           </div>
         </div>
-      </ImageSequenceHero>
+      </VideoHero>
 
       {/* Section Header */}
       <section className="py-20 lg:py-32 bg-white">
