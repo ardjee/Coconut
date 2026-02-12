@@ -1,4 +1,4 @@
-use client;
+"use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
@@ -81,7 +81,7 @@ export function ImageSequenceHero({
         const container = containerRef.current;
         const img = imagesRef.current[index];
 
-        if (!container || !img) return false;
+        if (!container || !canvas || !ctx || !img) return false;
         if (!img.complete) return false;
         if (img.naturalWidth === 0) return true;
 
