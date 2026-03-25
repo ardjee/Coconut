@@ -37,6 +37,7 @@ const navigation = [
     submenu: [
       { name: "Restaurant", href: "/restaurants" },
       { name: "Bar", href: "/services/bar" },
+      { name: "VIP Bar", href: "/services/vip-bar" },
       { name: "Laundry", href: "/services/laundry" },
       { name: "Pool", href: "/services/pool" },
     ],
