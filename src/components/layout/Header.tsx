@@ -89,13 +89,20 @@ export function Header() {
             <nav className="hidden lg:flex items-center flex-nowrap gap-x-10 xl:gap-x-12 ml-6 xl:ml-8">
               {navigation.map((item) => (
                 <div key={item.name} className="relative group">
-                  <Link
-                    href={item.href}
-                    className="text-sm uppercase text-charcoal-200 hover:text-charcoal-100 transition-colors relative py-2 px-1 whitespace-nowrap"
-                  >
-                    {item.name}
-                    <span className="absolute bottom-0 left-0 w-0 h-px bg-charcoal-200 transition-all duration-300 group-hover:w-full" />
-                  </Link>
+                  {item.submenu ? (
+                    <span className="text-sm uppercase text-charcoal-200 transition-colors relative py-2 px-1 whitespace-nowrap cursor-default select-none">
+                      {item.name}
+                      <span className="absolute bottom-0 left-0 w-0 h-px bg-charcoal-200 transition-all duration-300 group-hover:w-full" />
+                    </span>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="text-sm uppercase text-charcoal-200 hover:text-charcoal-100 transition-colors relative py-2 px-1 whitespace-nowrap"
+                    >
+                      {item.name}
+                      <span className="absolute bottom-0 left-0 w-0 h-px bg-charcoal-200 transition-all duration-300 group-hover:w-full" />
+                    </Link>
+                  )}
                   
                   {item.submenu && (
                     <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">

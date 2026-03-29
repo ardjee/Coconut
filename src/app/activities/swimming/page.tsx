@@ -1,6 +1,12 @@
 import { PageTemplate } from "@/app/lib/page-template";
+import { isFromHomeExperiences } from "@/app/lib/home-experiences-source";
 
-export default function SwimmingPage() {
+type PageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export default async function SwimmingPage({ searchParams }: PageProps) {
+  const sp = await searchParams;
   return (
     <PageTemplate
       category="Activities"
@@ -21,6 +27,7 @@ export default function SwimmingPage() {
         "/swimming pool 6.png",
         "/swimmingpool at sunset.png",
       ]}
+      showHomeExperiencesReturn={isFromHomeExperiences(sp)}
     />
   );
 }

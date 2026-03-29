@@ -1,6 +1,12 @@
 import { PageTemplate } from "@/app/lib/page-template";
+import { isFromHomeExperiences } from "@/app/lib/home-experiences-source";
 
-export default function VipBarPage() {
+type PageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export default async function VipBarPage({ searchParams }: PageProps) {
+  const sp = await searchParams;
   return (
     <PageTemplate
       category="Services"
@@ -19,6 +25,7 @@ export default function VipBarPage() {
         "/bar2.jpg",
         "/bar 3.png",
       ]}
+      showHomeExperiencesReturn={isFromHomeExperiences(sp)}
     />
   );
 }

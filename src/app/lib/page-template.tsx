@@ -10,6 +10,8 @@ import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 interface PageTemplateProps {
   category: string;
   title: string;
+  /** Shown only when the visitor opened this page via the home experiences blocks. */
+  showHomeExperiencesReturn?: boolean;
   heroImage?: string;
   heroImagePosition?: "top" | "center" | "bottom";
   detailsImage?: string;
@@ -50,6 +52,7 @@ export function PageTemplate({
     "/Coconut_1.25.1.jpg",
   ],
   showGallery = true,
+  showHomeExperiencesReturn = false,
 }: PageTemplateProps) {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const nextSectionRef = useRef<HTMLElement | null>(null);
@@ -105,6 +108,19 @@ export function PageTemplate({
 
       {/* Hero Section */}
       <section className="relative h-screen w-full overflow-hidden">
+        {showHomeExperiencesReturn && (
+          <div className="absolute top-24 left-0 right-0 z-20 container-ikos pointer-events-none">
+            <Button
+              asChild
+              className="pointer-events-auto bg-white/90 backdrop-blur-sm border border-charcoal-200/20 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-xs tracking-wider rounded-xl"
+            >
+              <Link href="/#home-experiences" className="inline-flex items-center gap-1">
+                <ChevronLeft className="w-4 h-4" aria-hidden />
+                Return
+              </Link>
+            </Button>
+          </div>
+        )}
         <div
           className="absolute inset-0 bg-cover"
           style={{

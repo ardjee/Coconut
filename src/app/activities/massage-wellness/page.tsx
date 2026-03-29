@@ -1,6 +1,12 @@
 import { PageTemplate } from "@/app/lib/page-template";
+import { isFromHomeExperiences } from "@/app/lib/home-experiences-source";
 
-export default function MassageWellnessPage() {
+type PageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export default async function MassageWellnessPage({ searchParams }: PageProps) {
+  const sp = await searchParams;
   return (
     <PageTemplate
       category="Activities"
@@ -14,6 +20,7 @@ export default function MassageWellnessPage() {
         info: "professional therapists | indoors and outdoors",
       }}
       showGallery={false}
+      showHomeExperiencesReturn={isFromHomeExperiences(sp)}
     />
   );
 }
