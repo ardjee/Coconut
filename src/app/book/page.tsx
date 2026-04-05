@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { COCONUT_EMAIL_MAILTO, COCONUT_WHATSAPP_URL } from "@/lib/contact";
 
 const accommodation = [
   {
@@ -279,10 +280,10 @@ export default function BookPage() {
         </div>
 
         <div className="relative h-full flex flex-col justify-end container-ikos pb-24 lg:pb-32">
-          <h2 className="text-lg lg:text-xl font-light text-white mb-4 uppercase tracking-wider">
+          <h2 className="text-lg lg:text-xl font-light text-white mb-4 uppercase tracking-wider ikos-headline-shadow-hero">
             Rates & Booking
           </h2>
-          <h1 className="text-4xl lg:text-5xl font-thin text-white mb-4 uppercase tracking-wide">
+          <h1 className="text-4xl lg:text-5xl font-thin text-white mb-4 uppercase tracking-wide ikos-headline-shadow-hero">
             Plan Your Stay
           </h1>
         </div>
@@ -310,7 +311,7 @@ export default function BookPage() {
             Coconut Beach offers competitive dual pricing for East African
             residents and international visitors. All prices are per person
             unless stated otherwise. To book, please contact us directly via{" "}
-            <a href="https://wa.me/256774192951" target="_blank" rel="noopener noreferrer" className="underline hover:text-ocean transition-colors">WhatsApp</a> or{" "}
+            <a href={COCONUT_WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="underline hover:text-ocean transition-colors">WhatsApp</a> or{" "}
             <a href="tel:+256774192951" className="underline hover:text-ocean transition-colors">Phone</a>.
           </p>
         </div>
@@ -374,7 +375,7 @@ export default function BookPage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href="https://wa.me/256700000000"
+                href={COCONUT_WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium h-11 px-8 bg-charcoal-200 text-white hover:bg-charcoal-100 transition-all duration-300 uppercase text-sm tracking-wider rounded-[3px]"
@@ -382,7 +383,7 @@ export default function BookPage() {
                 WhatsApp
               </a>
               <a
-                href="mailto:info@coconutbeach.ug"
+                href={COCONUT_EMAIL_MAILTO}
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium h-11 px-8 bg-transparent border border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider rounded-[3px]"
               >
                 Email Us

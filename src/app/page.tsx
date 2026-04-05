@@ -12,8 +12,17 @@ import { withHomeExperiencesSource } from "@/app/lib/home-experiences-source";
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const heroNextSectionRef = useRef<HTMLElement | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleExploreClick = () => {
+    if (heroNextSectionRef.current) {
+      heroNextSectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+    }
+  };
 
   const rooms = [
     {
@@ -110,24 +119,36 @@ export default function Home() {
         posterImage="/hero1.png"
       >
         <div className="relative h-full flex flex-col justify-end container-ikos pb-32 lg:pb-40">
-          <h1 className="text-4xl lg:text-4xl font-thin text-white mb-4 animate-fade-in uppercase tracking-wide">
+          <h1 className="text-4xl lg:text-4xl font-thin text-white mb-4 animate-fade-in uppercase tracking-wide ikos-headline-shadow-hero">
             COCONUT BEACH
           </h1>
-          <p className="text-lg lg:text-lg font-light text-white mb-8 animate-fade-in uppercase tracking-wider">
+          <p className="text-lg lg:text-lg font-light text-white mb-8 animate-fade-in uppercase tracking-wider ikos-headline-shadow-hero">
             PARADISE ON LAKE VICTORIA
           </p>
         </div>
 
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="flex flex-col items-center text-white">
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce z-20">
+          <div
+            role="button"
+            tabIndex={0}
+            aria-label="Scroll to next section"
+            className="flex flex-col items-center text-white cursor-pointer hover:opacity-80 transition-opacity"
+            onClick={handleExploreClick}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleExploreClick();
+              }
+            }}
+          >
             <span className="text-xs uppercase tracking-widest mb-2">Explore</span>
-            <ChevronDown className="w-6 h-6" />
+            <ChevronDown className="w-6 h-6" aria-hidden />
           </div>
         </div>
       </VideoHero>
 
       {/* Section Header */}
-      <section className="py-20 lg:py-32 bg-white">
+      <section ref={heroNextSectionRef} className="py-20 lg:py-32 bg-white scroll-mt-24">
         <div className="container-ikos max-w-4xl text-center">
           <h2 className="text-3xl lg:text-4xl font-thin text-charcoal-200 mb-4 ikos-fade-up uppercase">
             a world where nature

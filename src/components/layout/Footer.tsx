@@ -2,7 +2,6 @@ import Link from "next/link";
 
 const footerLinks = [
   { name: "Contact", href: "/contact" },
-  { name: "News", href: "/news" },
   { name: "Gallery", href: "/gallery" },
 ];
 
@@ -14,8 +13,8 @@ export function Footer() {
         <div className="container-ikos">
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-base text-charcoal-100">
-              Whether you are already a guest at our resorts or simply planning your stay ahead,
-              this app will help you explore all Coconut Beach Resorts and destinations.
+              Whether you are already a guest at our resort or simply planning your stay ahead,
+              we will help you explore the beauty of Lake Victoria.
             </p>
           </div>
         </div>

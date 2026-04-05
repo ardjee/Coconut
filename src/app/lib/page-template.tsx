@@ -16,16 +16,20 @@ interface PageTemplateProps {
   heroImagePosition?: "top" | "center" | "bottom";
   detailsImage?: string;
   detailsImageObjectFit?: "contain" | "cover";
-  description: string;
+  /** Intro copy under the title; use an array for multiple paragraphs. */
+  description: string | string[];
+  /** When false, skips the white block with repeated title + description under the hero. */
+  showPageIntro?: boolean;
   details?: {
     subtitle?: string;
-    info?: string;
+    /** Single block or multiple paragraphs (each entry is a `<p>`). */
+    info?: string | string[];
     hours?: string;
   };
   duplicateDetails?: boolean;
   details2?: {
     subtitle?: string;
-    info?: string;
+    info?: string | string[];
     hours?: string;
   };
   detailsImage2?: string;
@@ -53,6 +57,7 @@ export function PageTemplate({
   ],
   showGallery = true,
   showHomeExperiencesReturn = false,
+  showPageIntro = true,
 }: PageTemplateProps) {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const nextSectionRef = useRef<HTMLElement | null>(null);
@@ -102,6 +107,20 @@ export function PageTemplate({
     }
   };
 
+  const renderDetailsInfo = (info: string | string[] | undefined) => {
+    if (info == null || info === "" || (Array.isArray(info) && info.length === 0)) {
+      return null;
+    }
+    const parts = Array.isArray(info) ? info : [info];
+    return (
+      <div className="space-y-4 text-lg lg:text-xl font-light text-charcoal-100 mb-6">
+        {parts.map((paragraph, i) => (
+          <p key={i}>{paragraph}</p>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -130,10 +149,10 @@ export function PageTemplate({
         />
 
         <div className="relative h-full flex flex-col justify-end container-ikos pb-32 lg:pb-40">
-          <h2 className="text-lg lg:text-xl font-light text-white mb-4 uppercase tracking-wider">
+          <h2 className="text-lg lg:text-xl font-light text-white mb-4 uppercase tracking-wider ikos-headline-shadow-hero">
             {category}
           </h2>
-          <h1 className="text-4xl lg:text-5xl font-thin text-white mb-4 uppercase tracking-wide">
+          <h1 className="text-4xl lg:text-5xl font-thin text-white mb-4 uppercase tracking-wide ikos-headline-shadow-hero">
             {title}
           </h1>
         </div>
@@ -150,21 +169,32 @@ export function PageTemplate({
       </section>
 
       {/* Section Header */}
-      <section ref={nextSectionRef} className="py-20 lg:py-32 bg-white">
-        <div className="container-ikos max-w-4xl text-center">
-          <h2 className="text-3xl lg:text-4xl font-thin text-charcoal-200 mb-8 ikos-fade-up uppercase">
-            {title}
-          </h2>
-          <p className="text-base text-charcoal-100 max-w-2xl mx-auto ikos-fade-up">
-            {description}
-          </p>
-        </div>
-      </section>
+      {showPageIntro && (
+        <section ref={nextSectionRef} className="py-20 lg:py-32 bg-white scroll-mt-24">
+          <div className="container-ikos max-w-4xl text-center">
+            <h2 className="text-3xl lg:text-4xl font-thin text-charcoal-200 mb-8 ikos-fade-up uppercase">
+              {title}
+            </h2>
+            <div className="max-w-2xl mx-auto space-y-4">
+              {(Array.isArray(description) ? description : [description]).map(
+                (paragraph, i) => (
+                  <p key={i} className="text-base text-charcoal-100 ikos-fade-up">
+                    {paragraph}
+                  </p>
+                )
+              )}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Details Section */}
       {details && (
         <>
-          <section className="py-20 lg:py-32 bg-gradient-to-r from-sand-50 to-white">
+          <section
+            ref={!showPageIntro ? nextSectionRef : undefined}
+            className="py-20 lg:py-32 bg-gradient-to-r from-sand-50 to-white scroll-mt-24"
+          >
             <div className="container-ikos">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div className="order-2 lg:order-1">
@@ -180,11 +210,7 @@ export function PageTemplate({
                       {details.subtitle}
                     </h3>
                   )}
-                  {details.info && (
-                    <h4 className="text-lg lg:text-xl font-light text-charcoal-100 mb-6">
-                      {details.info}
-                    </h4>
-                  )}
+                  {renderDetailsInfo(details.info)}
                   {details.hours && (
                     <div className="mb-6">
                       <div className="text-sm text-charcoal-100 mb-2">
@@ -192,12 +218,6 @@ export function PageTemplate({
                       </div>
                     </div>
                   )}
-                  <Button
-                    asChild
-                    className="bg-transparent border border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider rounded-[3px]"
-                  >
-                    <Link href="/book">Book Now</Link>
-                  </Button>
                 </div>
               </div>
             </div>
@@ -219,11 +239,7 @@ export function PageTemplate({
                         {details2?.subtitle || details.subtitle}
                       </h3>
                     )}
-                    {(details2?.info || details.info) && (
-                      <h4 className="text-lg lg:text-xl font-light text-charcoal-100 mb-6">
-                        {details2?.info || details.info}
-                      </h4>
-                    )}
+                    {renderDetailsInfo(details2?.info ?? details.info)}
                     {(details2?.hours || details.hours) && (
                       <div className="mb-6">
                         <div className="text-sm text-charcoal-100 mb-2">
@@ -231,12 +247,6 @@ export function PageTemplate({
                         </div>
                       </div>
                     )}
-                    <Button
-                      asChild
-                      className="bg-transparent border border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider rounded-[3px]"
-                    >
-                      <Link href="/book">Book Now</Link>
-                    </Button>
                   </div>
                 </div>
               </div>
@@ -247,7 +257,10 @@ export function PageTemplate({
 
       {/* Image Gallery Carousel Section */}
       {showGallery && (
-      <section className="py-20 lg:py-32 bg-sand-50">
+      <section
+        ref={!showPageIntro && !details ? nextSectionRef : undefined}
+        className="py-20 lg:py-32 bg-sand-50 scroll-mt-24"
+      >
         <div className="container-ikos">
           <div className="relative max-w-6xl mx-auto">
             {/* Navigation Arrows */}

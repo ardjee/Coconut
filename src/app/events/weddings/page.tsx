@@ -12,12 +12,6 @@ export default function WeddingsPage() {
         subtitle: "Wedding Packages",
         info: "Full wedding planning | Lakeside venue | Customizable packages",
       }}
-      duplicateDetails={true}
-      detailsImage2="/wedding2.png"
-      details2={{
-        subtitle: "Romantic Venues",
-        info: "Lakeside ceremonies | Garden receptions | Stunning backdrops",
-      }}
       galleryImages={[
         "/wedding.png",
         "/wedding2.png",

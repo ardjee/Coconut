@@ -5,7 +5,7 @@ export default function BarPage() {
     <PageTemplate
       category="Services"
       title="Bar"
-      heroImage="/bar.png"
+      heroImage="/bar-hero.png"
       detailsImage="/bar2.jpg"
       description="Relax and unwind at our bar with a wide selection of drinks and cocktails. Enjoy the vibrant atmosphere and friendly service in a beautiful setting overlooking Lake Victoria."
       details={{

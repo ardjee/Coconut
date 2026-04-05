@@ -44,10 +44,10 @@ export default function FishAndChipsPage() {
         </div>
 
         <div className="relative h-full flex flex-col justify-end container-ikos pb-32 lg:pb-40">
-          <h2 className="text-lg lg:text-xl font-light text-white mb-4 uppercase tracking-wider">
+          <h2 className="text-lg lg:text-xl font-light text-white mb-4 uppercase tracking-wider ikos-headline-shadow-hero">
             Restaurants & Bars
           </h2>
-          <h1 className="text-4xl lg:text-5xl font-thin text-white mb-4 uppercase tracking-wide">
+          <h1 className="text-4xl lg:text-5xl font-thin text-white mb-4 uppercase tracking-wide ikos-headline-shadow-hero">
             Fish & Chips
           </h1>
         </div>

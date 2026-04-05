@@ -80,7 +80,7 @@ export function Header() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0">
-              <div className="text-2xl font-light tracking-wider text-charcoal-200">
+              <div className="text-2xl font-light tracking-wider text-charcoal-200 ikos-headline-shadow">
                 Coconut Beach
               </div>
             </Link>
@@ -90,14 +90,14 @@ export function Header() {
               {navigation.map((item) => (
                 <div key={item.name} className="relative group">
                   {item.submenu ? (
-                    <span className="text-sm uppercase text-charcoal-200 transition-colors relative py-2 px-1 whitespace-nowrap cursor-default select-none">
+                    <span className="text-sm uppercase text-charcoal-200 transition-colors relative py-2 px-1 whitespace-nowrap cursor-default select-none ikos-headline-shadow">
                       {item.name}
                       <span className="absolute bottom-0 left-0 w-0 h-px bg-charcoal-200 transition-all duration-300 group-hover:w-full" />
                     </span>
                   ) : (
                     <Link
                       href={item.href}
-                      className="text-sm uppercase text-charcoal-200 hover:text-charcoal-100 transition-colors relative py-2 px-1 whitespace-nowrap"
+                      className="text-sm uppercase text-charcoal-200 hover:text-charcoal-100 transition-colors relative py-2 px-1 whitespace-nowrap ikos-headline-shadow"
                     >
                       {item.name}
                       <span className="absolute bottom-0 left-0 w-0 h-px bg-charcoal-200 transition-all duration-300 group-hover:w-full" />
@@ -185,7 +185,7 @@ export function Header() {
           </Sheet>
 
           <Link href="/" className="absolute left-1/2 -translate-x-1/2">
-            <div className="text-xl font-light tracking-wider text-charcoal-200">
+            <div className="text-xl font-light tracking-wider text-charcoal-200 ikos-headline-shadow">
               Coconut Beach
             </div>
           </Link>
@@ -205,7 +205,7 @@ export function Header() {
         <div className={`container-ikos transition-opacity duration-1000 ${isScrolled ? "opacity-0" : "opacity-100 animate-fade-in"}`}>
           <div className="flex items-center justify-between h-20 pt-4">
             <Link href="/" className="pointer-events-auto">
-              <div className="text-2xl font-light tracking-wider text-white">
+              <div className="text-2xl font-light tracking-wider text-white ikos-headline-shadow-hero">
                 Coconut Beach
               </div>
             </Link>
