@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { VideoHero } from "@/components/home/VideoHero";
+import { FaqSection } from "@/components/home/FaqSection";
 import { withHomeExperiencesSource } from "@/app/lib/home-experiences-source";
 
 export default function Home() {
@@ -463,7 +464,10 @@ export default function Home() {
             Resort Location
           </h2>
           <p className="text-base text-charcoal-100 mb-8 ikos-fade-up">
-            Coconut Beach is located next to Majanji, near the border of Kenya. the resort is located on the beach of lake Victoria
+            Coconut Beach sits on the shores of Lake Victoria in Majanji, Busia District —
+            about 9 km south of Busia town in eastern Uganda, close to the Kenyan border.
+            It is a quiet, private stretch of beach, well away from the busier resorts
+            around Entebbe and Kampala.
           </p>
 
         </div>
@@ -485,6 +489,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <FaqSection />
 
       <Footer />
     </div>
