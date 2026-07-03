@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Pool Table & Games",
+  description:
+    "Play billiards in the lounge at Coconut Beach resort on Lake Victoria — a relaxed way to spend the evening after a day at the beach.",
+};
 
 export default function PoolTablePage() {
   return (

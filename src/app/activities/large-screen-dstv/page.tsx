@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Live Sports on Big Screen DSTV",
+  description:
+    "Watch live football and entertainment on the large-screen DSTV at Coconut Beach resort on Lake Victoria — free for all guests.",
+};
 
 export default function LargeScreenDSTVPage() {
   return (

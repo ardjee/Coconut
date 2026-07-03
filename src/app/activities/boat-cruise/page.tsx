@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Boat Cruises on Lake Victoria",
+  description:
+    "Scenic boat cruises from Coconut Beach, Majanji: spot birds and wildlife on Lake Victoria with an experienced local captain.",
+};
 
 export default function BoatCruisePage() {
   return (

@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Ceremonies & Celebrations",
+  description:
+    "Host introductions, graduations and other ceremonies at Coconut Beach — a beautiful lakeside venue in Majanji, Uganda.",
+};
 
 export default function CeremoniesPage() {
   return (

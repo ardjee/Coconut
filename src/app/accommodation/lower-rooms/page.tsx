@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Lower Rooms with Garden Access",
+  description:
+    "Comfortable ground-floor rooms at Coconut Beach with en-suite bathroom and direct garden access, steps from Lake Victoria. From 90,000 UGX per night.",
+};
 
 export default function LowerRoomsPage() {
   return (

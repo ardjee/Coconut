@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Weddings on Lake Victoria",
+  description:
+    "Celebrate your wedding at Coconut Beach: lakeside ceremonies, garden receptions and full planning packages in Majanji, Uganda.",
+};
 
 export default function WeddingsPage() {
   return (

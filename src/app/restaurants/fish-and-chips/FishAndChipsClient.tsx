@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
-export default function AnayaPage() {
+export default function FishAndChipsPage() {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function AnayaPage() {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: "url('https://ikosresorts.com/wp-content/uploads/2022/09/Ikos-Andalusia-_-Anaya-Restaurant-Outdoor_2880x1570-1-scaled.jpg')",
+            backgroundImage: "url('/food (AI1).png')",
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
@@ -48,7 +48,7 @@ export default function AnayaPage() {
             Restaurants & Bars
           </h2>
           <h1 className="text-4xl lg:text-5xl font-thin text-white mb-4 uppercase tracking-wide">
-            Anaya
+            Fish & Chips
           </h1>
         </div>
 
@@ -64,13 +64,13 @@ export default function AnayaPage() {
       <section className="py-20 lg:py-32 bg-white">
         <div className="container-ikos max-w-4xl text-center">
           <h2 className="text-3xl lg:text-4xl font-thin text-charcoal-200 mb-4 ikos-fade-up uppercase">
-            An Asian culinary
+            Fresh Tilapia
           </h2>
           <h2 className="text-3xl lg:text-4xl font-thin text-charcoal-200 mb-8 ikos-fade-up uppercase">
-            adventure
+            Fish & Chips
           </h2>
           <p className="text-base text-charcoal-100 max-w-2xl mx-auto ikos-fade-up">
-            Á la carte creations inspired by the aromas of Asia take you on a culinary journey through Thailand, China, and India. Enjoy Anaya's elegant interiors or relax outdoors with a sea view and choose from an extensive menu bringing delicious Thai accents to European staples, marrying Asian flavours with Parisian finesse.
+            Experience our signature Fish & Chips featuring locally sourced tilapia, perfectly fried to golden perfection. Served with hand-cut chips and our special tartar sauce, this classic dish gets a tropical twist at Coconut Beach.
           </p>
         </div>
       </section>
@@ -81,29 +81,32 @@ export default function AnayaPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
               <img
-                src="https://ikosresorts.com/wp-content/uploads/2022/09/Ikos-Resorts_Anaya-Restaurant-_2880x1920-_1_-scaled.webp"
-                alt="Anaya Restaurant"
+                src="/food (AI1).png"
+                alt="Fish & Chips"
                 className="w-full h-96 object-cover rounded-lg shadow-lg"
               />
             </div>
             <div className="order-1 lg:order-2 text-center lg:text-left">
               <h3 className="text-2xl lg:text-3xl font-thin text-charcoal-200 mb-4 uppercase">
-                Asian
+                Seafood
               </h3>
               <h4 className="text-lg lg:text-xl font-light text-charcoal-100 mb-6">
-                Main Building | Al Fresco | Adults Area Available
+                Beachfront | Al Fresco | Family Friendly
               </h4>
               <div className="mb-6">
                 <div className="text-sm text-charcoal-100 mb-2">
-                  <strong>Dinner:</strong> 19:00-22:00
+                  <strong>Lunch:</strong> 12:00-15:00
+                </div>
+                <div className="text-sm text-charcoal-100 mb-2">
+                  <strong>Dinner:</strong> 18:00-21:00
                 </div>
               </div>
               <Button
                 asChild
                 className="bg-charcoal-200 text-white hover:bg-charcoal-100 transition-all duration-300 uppercase text-sm tracking-wider"
               >
-                <Link href="https://ikosresorts.com/menus/IAN/IAN_Anaya_Dinner_EN_DE_FR.pdf" target="_blank">
-                  View Menu
+                <Link href="/restaurants">
+                  View All Restaurants
                 </Link>
               </Button>
             </div>
@@ -111,37 +114,15 @@ export default function AnayaPage() {
         </div>
       </section>
 
-      {/* Chef Section */}
+      {/* Specialty Section */}
       <section className="py-20 lg:py-32 bg-white">
         <div className="container-ikos max-w-4xl text-center">
           <h2 className="text-2xl lg:text-3xl font-thin text-charcoal-200 mb-6 ikos-fade-up uppercase">
-            Chef Thiou
+            Our Specialty
           </h2>
           <p className="text-base text-charcoal-100 ikos-fade-up">
-            Known as the Master of Asian and Thai cuisine, Michelin-star Chef Thiou expertly combines Asian influence and fresh European ingredients, flavouring her refined dishes with sharp spices and modern dressings. From her award-winning Parisian restaurant to Coconut Beach, Chef Thiou creates a one-of-a-kind dining experience.
+            We source our tilapia fresh from local fishermen daily, ensuring the highest quality and supporting the local community. Our batter is made with secret family recipe, creating the perfect crispy exterior while keeping the fish tender and moist.
           </p>
-        </div>
-      </section>
-
-      {/* Chef Images Section */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="container-ikos max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <img
-                src="https://ikosresorts.com/wp-content/uploads/2022/11/Ikos_Gastronomy22-1723_2880x1921-1-scaled.jpg"
-                alt="Chef Thiou Food"
-                className="w-full h-auto object-cover rounded-lg shadow-lg"
-              />
-            </div>
-            <div className="flex justify-center">
-              <img
-                src="https://ikosresorts.com/wp-content/uploads/2022/11/chef-thiou-555x555.jpg"
-                alt="Chef Thiou"
-                className="w-64 h-64 object-cover rounded-full shadow-lg"
-              />
-            </div>
-          </div>
         </div>
       </section>
 
@@ -150,15 +131,15 @@ export default function AnayaPage() {
         <div className="container-ikos">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              "https://ikosresorts.com/wp-content/uploads/2022/11/Ikos_Gastronomy22-1214_2880x1880-1-scaled.jpg",
-              "https://ikosresorts.com/wp-content/uploads/2022/11/Ikos_Gastronomy22-1712_2880x1921-1-scaled.jpg",
-              "https://ikosresorts.com/wp-content/uploads/2022/11/Ikos_Gastronomy22-1720_2880x1921-1-scaled.jpg",
-              "https://ikosresorts.com/wp-content/uploads/2022/11/Ikos_Gastronomy22-1708_2880x1921-1-scaled.jpg",
+              "/food (AI1).png",
+              "/food (AI1).png",
+              "/food (AI1).png",
+              "/food (AI1).png",
             ].map((src, i) => (
               <div key={i} className="aspect-square overflow-hidden rounded-lg shadow-lg">
                 <img
                   src={src}
-                  alt={`Anaya Restaurant ${i+1}`}
+                  alt={`Fish & Chips ${i+1}`}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -174,10 +155,10 @@ export default function AnayaPage() {
             Useful Information
           </h2>
           <p className="text-base text-charcoal-100 mb-6 ikos-fade-up">
-            Please note that a reservation is required for dinner. Prior to arrival, guests can pre-book up to 3 dinner reservations, whilst Deluxe guests can pre-book all dinner reservations in advance. All restaurants offer children's menus and freshly prepared baby food upon request. Menus and opening hours are subject to change. Entry to the restaurants with shorts and flip flops is not permitted during dinner service.
+            Enjoy our Fish & Chips restaurant with stunning beach views. Walk-ins are welcome during lunch, but we recommend reservations for dinner. We offer a children's menu and can accommodate dietary restrictions upon request.
           </p>
           <p className="text-base text-charcoal-100 ikos-fade-up">
-            Adults Area Available
+            Family Friendly | Beachfront Dining
           </p>
         </div>
       </section>
@@ -190,14 +171,11 @@ export default function AnayaPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { name: "Chiringuito", cuisine: "Spanish", link: "/restaurants/chiringuito", image: "https://ikosresorts.com/wp-content/uploads/2023/01/Ikos-Andalusia-_-Chiringuito_14_1794_2880x1920-555x555.jpg", description: "Savour authentic Spanish cuisine at Chiringuito, an elegant take on the beloved Spanish beach restaurants that dot the coast. From light bites to traditional tapas and seafood affairs, enjoy a selection of the best that these Mediterranean waters have to offer." },
-              { name: "Seasons", cuisine: "Asian-Mediterranean", link: "/restaurants/seasons", image: "https://ikosresorts.com/wp-content/uploads/2023/01/Ikos-Andalusia_Seasons_Terrace0990_2880x1920-555x555.jpg", description: "Enjoy Mediterranean dishes crafted with fresh ingredients and infused with Asian flavours in a sublime al fresco setting with sea views at Seasons. This à la carte dining experience features the finest seasonal produce and blends influences from both near and far." },
-              { name: "Beach Club", cuisine: "International", link: "/restaurants/beach-club", image: "https://ikosresorts.com/wp-content/uploads/2022/11/Ikos-Andalusia-Beach-Club-Restaurant-Outdoor_2880x1573-1-1-555x555.jpg", description: "Offering al fresco dining and cocktails with a view, the Beach Club serves light snacks and lunch throughout the day, followed by an à la carte dinner." },
-              { name: "Oliva", cuisine: "Spanish", link: "/restaurants/oliva", image: "https://ikosresorts.com/wp-content/uploads/2022/09/Ikos-Andalusia-_-Oliva-Restaurant-Indoor_2880x1734-1-555x555.jpg", description: "The traditional flavours of Spain are given a contemporary twist with this delightful à la carte menu, curated by two-Michelin-star chef Andoni Luis Aduriz." },
-              { name: "Flavors", cuisine: "Mediterranean buffet", link: "/restaurants/flavors", image: "https://ikosresorts.com/wp-content/uploads/2022/09/Ikos-Andalusia-_-Flavors-Restaurant-Indoor_2880x1663-1-555x555.jpg", description: "Discover a world of choice at Flavors, where you will find international cuisine served as an elegant buffet. Mediterranean zest meets fresh, sun-soaked ingredients and worldly influences in a family-friendly setting." },
-              { name: "Provence", cuisine: "French", link: "/restaurants/provence", image: "https://ikosresorts.com/wp-content/uploads/2022/11/Ikos-Andalusia-_-Provence-Restaurant-Outdoor_2880x1575-1-555x555.jpg", description: "Discover the exquisite cuisine of Southern France, served in elegant surrounds at this beautiful à la carte restaurant." },
-              { name: "Fresco", cuisine: "Italian", link: "/restaurants/fresco", image: "https://ikosresorts.com/wp-content/uploads/2022/11/Ikos-Andalusia-_-Fresco-Indoor_2700x1722-1-555x555.jpg", description: "Guided by the genius of Michelin-starred chef Ettore Botrini, discover the exquisite culinary sensations of Italy. Fresco offers the finest à la carte dining, authentic Italian flavours and fresh local produce paired with perfect wines." },
-              { name: "Ouzo", cuisine: "Greek", link: "/restaurants/ouzo", image: "https://ikosresorts.com/wp-content/uploads/2022/11/Ikos-Andalusia-Ouzo-Restaurant-Outdoor-1-555x555.jpg", description: "Enjoy rich Greek cuisine with a delightfully modern twist in a romantic open-air setting. A combination of Greek tradition with innovative techniques and delicious flavours." },
+              { name: "Fresco", cuisine: "Italian", link: "/restaurants/fresco", image: "https://images.unsplash.com/photo-1515443961218-a51367888e4b?q=80&w=800", description: "Authentic Italian cuisine with fresh pasta and wood-fired pizzas." },
+              { name: "Flavors", cuisine: "Asian", link: "/restaurants/flavors", image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800", description: "A fusion of Asian flavors from Thailand, China, and Japan." },
+              { name: "Oliva", cuisine: "Greek", link: "/restaurants/oliva", image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800", description: "Traditional Greek dishes with a modern twist." },
+              { name: "Provence", cuisine: "French", link: "/restaurants/provence", image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800", description: "Elegant French dining with seasonal ingredients." },
+              { name: "Beach Club", cuisine: "Casual Dining", link: "/restaurants/beach-club", image: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?q=80&w=800", description: "Relaxed beachfront dining with international cuisine." },
             ].map((restaurant) => (
               <div key={restaurant.name} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
                 <div className="aspect-square overflow-hidden">

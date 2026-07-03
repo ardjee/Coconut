@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Workshops & Seminars",
+  description:
+    "Run workshops and seminars at Coconut Beach on Lake Victoria — an inspiring lakeside venue with accommodation and catering.",
+};
 
 export default function WorkshopsPage() {
   return (

@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Local School & Community Visits",
+  description:
+    "Visit a nearby community school from Coconut Beach and experience everyday life in Majanji, Uganda — a meaningful cultural excursion.",
+};
 
 export default function LocalSchoolVisitPage() {
   return (

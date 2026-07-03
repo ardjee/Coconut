@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Boda Boda Village Tours",
+  description:
+    "Explore the Ugandan countryside by boda boda from Coconut Beach — guided motorcycle tours through local villages around Majanji.",
+};
 
 export default function BodaBodaDrivesPage() {
   return (

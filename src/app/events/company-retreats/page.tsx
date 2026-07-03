@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Company Retreats",
+  description:
+    "Corporate retreats and team building at Coconut Beach on Lake Victoria: meeting space, group accommodation, catering and activities.",
+};
 
 export default function CompanyRetreatsPage() {
   return (

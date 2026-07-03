@@ -1,11 +1,22 @@
-"use client";
-
+import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-const restaurants = [
+export const metadata: Metadata = {
+  title: "Restaurants & Bars",
+  description:
+    "Lakeside dining at Coconut Beach on Lake Victoria, Uganda. Fresh fish and chips, pancakes, fruit platters and more, made from local ingredients.",
+};
+
+// Only entries with an href have their own detail page.
+const restaurants: {
+  name: string;
+  cuisine: string;
+  image: string;
+  href?: string;
+}[] = [
   {
     name: "Fish & Chips",
     cuisine: "Seafood",
@@ -16,31 +27,26 @@ const restaurants = [
     name: "Chicken Diner",
     cuisine: "American",
     image: "/food (AI2).png",
-    href: "/restaurants/chicken-diner",
   },
   {
     name: "Pancakes",
     cuisine: "Ugandan Style",
     image: "/food (AI3).png",
-    href: "/restaurants/pancakes",
   },
   {
-    name: "Pancakes",
+    name: "American Pancakes",
     cuisine: "American",
     image: "/Food (AI4).png",
-    href: "/restaurants/pancakes-american",
   },
   {
     name: "Fruit Platter",
     cuisine: "Ugandan Fruit",
     image: "/food (AI5).png",
-    href: "/restaurants/fruit-platter",
   },
   {
     name: "Eggs & Fruit",
     cuisine: "Breakfast",
     image: "/food (AI6).png",
-    href: "/restaurants/eggs-and-fruit",
   },
 ];
 
@@ -83,15 +89,17 @@ export default function RestaurantsPage() {
                     {restaurant.name}
                   </h3>
                   <p className="text-sm text-charcoal-100 mb-6">{restaurant.cuisine}</p>
-                  <div className="mt-auto">
-                    <Button
-                      asChild
-                      variant="outline"
-                      className="w-full border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider rounded-[3px]"
-                    >
-                      <Link href={restaurant.href}>EXPLORE</Link>
-                    </Button>
-                  </div>
+                  {restaurant.href && (
+                    <div className="mt-auto">
+                      <Button
+                        asChild
+                        variant="outline"
+                        className="w-full border-charcoal-200 text-charcoal-200 hover:bg-charcoal-200 hover:text-white transition-all duration-300 uppercase text-sm tracking-wider rounded-[3px]"
+                      >
+                        <Link href={restaurant.href}>EXPLORE</Link>
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

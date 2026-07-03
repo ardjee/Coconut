@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Massage & Wellness",
+  description:
+    "Relaxing massage and wellness treatments in a tranquil lakeside setting at Coconut Beach on Lake Victoria, from 50,000 UGX.",
+};
 
 export default function MassageWellnessPage() {
   return (

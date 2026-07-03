@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Beach Volleyball",
+  description:
+    "Play beach volleyball on our lakeside sand court at Coconut Beach, Lake Victoria — free for guests and visitors.",
+};
 
 export default function BeachVolleyballPage() {
   return (

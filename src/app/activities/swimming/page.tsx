@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Swimming Pool",
+  description:
+    "Swim in the multi-depth pool at Coconut Beach, Majanji — suitable for all ages, free for hotel guests, day passes available for visitors.",
+};
 
 export default function SwimmingPage() {
   return (

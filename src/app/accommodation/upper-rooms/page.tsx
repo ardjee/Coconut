@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Upper Rooms with Lake View",
+  description:
+    "Upper rooms at Coconut Beach: king-sized bed, en-suite bathroom and a private balcony overlooking Lake Victoria. From 120,000 UGX per night.",
+};
 
 export default function UpperRoomsPage() {
   return (

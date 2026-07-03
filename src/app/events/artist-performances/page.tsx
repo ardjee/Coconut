@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Live Artist Performances",
+  description:
+    "Live music and artist performances at Coconut Beach on Lake Victoria — enjoy Ugandan artists in a unique lakeside setting.",
+};
 
 export default function ArtistPerformancesPage() {
   return (

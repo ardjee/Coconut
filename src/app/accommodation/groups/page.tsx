@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Group Accommodation & Retreats",
+  description:
+    "Group stays at Coconut Beach on Lake Victoria: discounted rates for retreats, workshops, team building and celebrations in Majanji, Uganda.",
+};
 
 export default function GroupsPage() {
   return (

@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Laundry Service",
+  description:
+    "Same-day laundry and ironing service at Coconut Beach resort, Majanji — 1,000 UGX per item so you can pack light.",
+};
 
 export default function LaundryPage() {
   return (

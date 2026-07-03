@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Activities & Experiences",
+  description:
+    "Things to do at Coconut Beach: boat cruises on Lake Victoria, swimming, beach volleyball, boda boda village tours, massage and more.",
+};
 
 export default function DeluxeCollectionPage() {
   return (

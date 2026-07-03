@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Beach Bar",
+  description:
+    "The beach bar at Coconut Beach serves cocktails, cold local beers, wines and soft drinks with a view over Lake Victoria. From 3,000 UGX.",
+};
 
 export default function BarPage() {
   return (

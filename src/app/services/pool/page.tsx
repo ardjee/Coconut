@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Resort Pool",
+  description:
+    "The swimming pool at Coconut Beach: multiple depths for all ages, loungers and a lakeside setting on Lake Victoria.",
+};
 
 export default function PoolPage() {
   return (

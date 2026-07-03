@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Lakeside Camping",
+  description:
+    "Camp on the shores of Lake Victoria at Coconut Beach, Majanji. Tents available or bring your own — full access to the pool and resort facilities.",
+};
 
 export default function CampingPage() {
   return (

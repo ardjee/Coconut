@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "Birthday Parties",
+  description:
+    "Celebrate your birthday at Coconut Beach on Lake Victoria: lakeside venue, catering, music and accommodation for your guests.",
+};
 
 export default function BirthdayPartiesPage() {
   return (

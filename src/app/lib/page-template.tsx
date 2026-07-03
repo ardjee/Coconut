@@ -114,9 +114,9 @@ export function PageTemplate({
         />
 
         <div className="relative h-full flex flex-col justify-end container-ikos pb-32 lg:pb-40">
-          <h2 className="text-lg lg:text-xl font-light text-white mb-4 uppercase tracking-wider">
+          <p className="text-lg lg:text-xl font-light text-white mb-4 uppercase tracking-wider">
             {category}
-          </h2>
+          </p>
           <h1 className="text-4xl lg:text-5xl font-thin text-white mb-4 uppercase tracking-wide">
             {title}
           </h1>

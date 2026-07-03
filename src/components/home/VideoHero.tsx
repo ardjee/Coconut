@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 interface VideoHeroProps {
@@ -12,6 +12,14 @@ interface VideoHeroProps {
 export function VideoHero({ videoSrc, posterImage, children }: VideoHeroProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isVideoReady, setIsVideoReady] = useState(false);
+
+    // A cached video can fire `canplay` before hydration attaches the React
+    // handler, which would leave the poster covering the video forever.
+    useEffect(() => {
+        if (videoRef.current && videoRef.current.readyState >= 3) {
+            setIsVideoReady(true);
+        }
+    }, []);
 
     return (
         <section className="relative h-screen w-full overflow-hidden bg-black">

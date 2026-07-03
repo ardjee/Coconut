@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PageTemplate } from "@/app/lib/page-template";
+
+export const metadata: Metadata = {
+  title: "About Us — Our Concept",
+  description:
+    "The story and philosophy of Coconut Beach: a relaxed, barefoot lakeside resort in Majanji, Uganda, built around the beauty of Lake Victoria.",
+};
 
 export default function ConceptPage() {
   return (
