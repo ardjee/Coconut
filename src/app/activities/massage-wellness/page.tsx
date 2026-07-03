@@ -18,8 +18,8 @@ export default async function MassageWellnessPage({ searchParams }: PageProps) {
     <PageTemplate
       category="Activities"
       title="Massage & Wellness"
-      heroImage="/massage 1.png"
-      detailsImage="/massage 2.png"
+      heroImage="/massage-1.webp"
+      detailsImage="/massage-2.webp"
       detailsImageObjectFit="cover"
       description=""
       showPageIntro={false}

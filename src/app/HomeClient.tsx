@@ -64,7 +64,7 @@ export default function Home() {
     {
       title: "Spa Experience",
       subtitle: "Luxurious Spa Treatment Room",
-      image: "/massage 2.png",
+      image: "/massage-2.webp",
       href: "/activities/massage-wellness",
     },
   ];
