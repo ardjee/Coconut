@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://coconutbeach.ug/sitemap.xml",
+    sitemap: "https://www.coconutbeach.ug/sitemap.xml",
   };
 }

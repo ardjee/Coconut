@@ -8,11 +8,21 @@ import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { VideoHero } from "@/components/home/VideoHero";
+import { withHomeExperiencesSource } from "@/app/lib/home-experiences-source";
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const heroNextSectionRef = useRef<HTMLElement | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleExploreClick = () => {
+    if (heroNextSectionRef.current) {
+      heroNextSectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+    }
+  };
 
   const rooms = [
     {
@@ -109,24 +119,36 @@ export default function Home() {
         posterImage="/hero1.png"
       >
         <div className="relative h-full flex flex-col justify-end container-ikos pb-32 lg:pb-40">
-          <h1 className="text-4xl lg:text-4xl font-thin text-white mb-4 animate-fade-in uppercase tracking-wide">
+          <h1 className="text-4xl lg:text-4xl font-thin text-white mb-4 animate-fade-in uppercase tracking-wide ikos-headline-shadow-hero">
             COCONUT BEACH
           </h1>
-          <p className="text-lg lg:text-lg font-light text-white mb-8 animate-fade-in uppercase tracking-wider">
+          <p className="text-lg lg:text-lg font-light text-white mb-8 animate-fade-in uppercase tracking-wider ikos-headline-shadow-hero">
             PARADISE ON LAKE VICTORIA
           </p>
         </div>
 
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="flex flex-col items-center text-white">
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce z-20">
+          <div
+            role="button"
+            tabIndex={0}
+            aria-label="Scroll to next section"
+            className="flex flex-col items-center text-white cursor-pointer hover:opacity-80 transition-opacity"
+            onClick={handleExploreClick}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleExploreClick();
+              }
+            }}
+          >
             <span className="text-xs uppercase tracking-widest mb-2">Explore</span>
-            <ChevronDown className="w-6 h-6" />
+            <ChevronDown className="w-6 h-6" aria-hidden />
           </div>
         </div>
       </VideoHero>
 
       {/* Section Header */}
-      <section className="py-20 lg:py-32 bg-white">
+      <section ref={heroNextSectionRef} className="py-20 lg:py-32 bg-white scroll-mt-24">
         <div className="container-ikos max-w-4xl text-center">
           <h2 className="text-3xl lg:text-4xl font-thin text-charcoal-200 mb-4 ikos-fade-up uppercase">
             a world where nature
@@ -352,7 +374,7 @@ export default function Home() {
       </section>
 
       {/* Experiences Section */}
-      <section className="py-20 lg:py-32 bg-white">
+      <section id="home-experiences" className="py-20 lg:py-32 bg-white scroll-mt-24">
         <div className="container-ikos max-w-4xl text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-thin text-charcoal-200 mb-4 ikos-fade-up">
             <span className="block">A world of</span>
@@ -368,29 +390,52 @@ export default function Home() {
         <div className="container-ikos">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { title: "Activities", image: "/volleyball2.png" },
-              { title: "Kids", image: "/Ugandan children.png" },
-              { title: "Spa", image: "photo-1540555700478-4be289fbecef" },
-              { title: "Entertainment", image: "photo-1470229722913-7c0e2dbbafd3" },
-            ].map((item, i) => (
-              <Card
-                key={i}
-                className="group overflow-hidden border-0 shadow-none bg-transparent cursor-pointer rounded-2xl"
+              {
+                title: "Activities",
+                image: "/volleyball2.png",
+                href: "/activities/beach-volleyball",
+              },
+              {
+                title: "Kids",
+                image: "/Ugandan children.png",
+                href: "/activities/swimming",
+              },
+              {
+                title: "Spa",
+                image: "photo-1540555700478-4be289fbecef",
+                href: "/activities/massage-wellness",
+              },
+              {
+                title: "Entertainment",
+                image: "photo-1470229722913-7c0e2dbbafd3",
+                href: "/services/vip-bar",
+              },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={withHomeExperiencesSource(item.href)}
+                className="block rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal-200"
               >
-                <div className="relative h-80 overflow-hidden rounded-2xl">
-                  <img
-                    src={item.image.startsWith('/') ? item.image : `https://images.unsplash.com/${item.image}?q=80&w=800`}
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 rounded-2xl"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-2xl" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <h3 className="text-xl font-light text-white uppercase tracking-wide">
-                      {item.title}
-                    </h3>
+                <Card className="group overflow-hidden border-0 shadow-none bg-transparent cursor-pointer rounded-2xl h-full">
+                  <div className="relative h-80 overflow-hidden rounded-2xl">
+                    <img
+                      src={
+                        item.image.startsWith("/")
+                          ? item.image
+                          : `https://images.unsplash.com/${item.image}?q=80&w=800`
+                      }
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 rounded-2xl"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-2xl" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <h3 className="text-xl font-light text-white uppercase tracking-wide">
+                        {item.title}
+                      </h3>
+                    </div>
                   </div>
-                </div>
-              </Card>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>

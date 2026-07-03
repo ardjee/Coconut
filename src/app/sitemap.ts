@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://coconutbeach.ug";
+const SITE_URL = "https://www.coconutbeach.ug";
 
 const routes = [
   "",
   "/book",
+  "/contact",
   "/gallery",
   "/concept",
   "/resorts",
@@ -37,6 +38,7 @@ const routes = [
   "/services/bar",
   "/services/laundry",
   "/services/pool",
+  "/services/vip-bar",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

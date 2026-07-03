@@ -74,7 +74,7 @@ export default function RestaurantsPage() {
             {restaurants.map((restaurant, i) => (
               <div
                 key={i}
-                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col"
+                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="relative h-64 overflow-hidden">
                   <img
@@ -84,7 +84,7 @@ export default function RestaurantsPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                 </div>
-                <div className="p-6 flex flex-col flex-grow">
+                <div className="p-6">
                   <h3 className="text-2xl font-light text-charcoal-200 mb-2 uppercase">
                     {restaurant.name}
                   </h3>
